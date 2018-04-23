@@ -2,8 +2,9 @@ import java.util.List;
 
 public class Person extends Player{
 
-    List<Card> cardsInHand;
-
+    public Person(Deck deck) {
+        super.cardsInHand = drawCards(deck.getListOfCards());
+    }
     public Card pickCard(){
         return null;
     }
