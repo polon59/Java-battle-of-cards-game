@@ -4,8 +4,9 @@ public class Main{
         // Game game = new Game();
         // game.startNewGame();
         Deck deck = new Deck();
-        for(Card card : deck.getListOfCards()) {
-            System.out.println(card.toString());
-        }
+        Player person = new Person(deck);
+        Player computer = new Computer(deck);
+        System.out.println(person.cardsInHand.toString());
+        System.out.println(computer.cardsInHand.toString());
     }
 }
