@@ -5,7 +5,7 @@ public class Person extends Player{
     List<Card> cardsInHand;
 
     public Card pickCard(){
-        
+        return null;
     }
 
 
