@@ -2,8 +2,6 @@ import java.util.List;
 
 public class Computer extends Player {
 
-    List<Card> cardsInHand;
-
     public Computer(Deck deck) {
         super.cardsInHand = drawCards(deck.getListOfCards());
     }
@@ -11,6 +9,9 @@ public class Computer extends Player {
     public Card pickCard() {
         return null;
     }
+
+        
+        
 }
 
 
