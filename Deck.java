@@ -6,6 +6,7 @@ public class Deck {
     List<Card> listOfCards;
 
     public Deck() {
+        
         listOfCards = new ArrayList<>();
         for (int suit = 1; suit < 5; suit++) {
             for (int rank = 1; rank < 14; rank++) {
@@ -14,6 +15,7 @@ public class Deck {
         }
         shuffle();
     }
+    
 
     public List<Card> getListOfCards(){ 
         return listOfCards;
