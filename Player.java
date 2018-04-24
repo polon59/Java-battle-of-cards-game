@@ -28,6 +28,7 @@ public void displayCardsInhand(){
     final String ANSI_RESET = "\u001B[0m";
     final String ANSI_BLACK = "\u001B[30m";
     final String ANSI_RED = "\u001B[31m";
+    final String ANSI_BLUE = "\u001B[34m";
 
     for (int cardIndex = 0; cardIndex < cardsInHand.size(); cardIndex ++){
         System.out.print(cardIndex +1 + "       ");
@@ -42,15 +43,24 @@ public void displayCardsInhand(){
         for (int i = 0; i < cardsInHand.size(); i++){
             //cardLineToPrint = "";
 
-            
-            if (cardsInHand.get(i).checkIfCardIsRed()){
-                System.out.print(ANSI_RED + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + 
+            // change to getFaceDown
+            if(cardsInHand.get(i).faceDown){
+                System.out.print(ANSI_BLUE + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + 
                 " " + ANSI_RESET); 
+
             }
             else{
-                System.out.print(ANSI_BLACK + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + 
-                " " + ANSI_RESET); 
+                if (cardsInHand.get(i).checkIfCardIsRed()){
+                    System.out.print(ANSI_RED + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + 
+                    " " + ANSI_RESET); 
+                }
+                else{
+                    System.out.print(ANSI_BLACK + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + 
+                    " " + ANSI_RESET); 
+                }
             }
+            
+            
             
 
         }

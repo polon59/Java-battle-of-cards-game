@@ -11,14 +11,9 @@ public class Person extends Player{
     }
 
     public int pickCard(){
-        System.out.println("Please enter a number between 1 and " + cardsInHand.size());
-
-        try{
-            int cardIndex = reader.nextInt(); 
-        }
-        catch(Exception InputMismatchException){
-            System.out.println("Wrong input, try again");
-        }
-        return cardIndex - 1;
+        int cardIndex = reader.nextInt();
+        return cardIndex;
     }
+
+    
 }

@@ -7,14 +7,19 @@ public class Deck {
 
     private static final int FIRST_CARD = 0;
 
-    public Deck() {
-        
-        listOfCards = new ArrayList<>();
-        for (int suit = 1; suit < 5; suit++) {
-            for (int rank = 1; rank < 14; rank++) {
-                listOfCards.add(new Card(rank, suit, false));
+    public Deck() {        
+        listOfCards = new ArrayList<>();    
+    }
+
+    public void createCards(){
+        for (int i = 0; i< 2; i++){
+            for (Color color: Color.values()) {
+                for (int rank = 1; rank < 14; rank++) {
+                    listOfCards.add(new Card(rank, color, false));
+                }
             }
         }
+        
         shuffle();
     }
     

@@ -14,29 +14,39 @@ public class Game{
 
     public Game(){
         deck = new Deck();
+        deck.createCards();
         person = new Person(deck);
         computer = new Computer(deck);
+        cardsOnTable = new Deck();
+        runGame();
     }
 
     public void runGame(){
         //losowanie pierwszej karty
+        clearScreen();
         SetPatternCard();
 
+
         displayGameTable();
-        sleep(3);
+        placeCardOnTop(person);
         clearScreen();
-        
-        placeCardOnTop(2);
+
+        displayGameTable();
+        placeCardOnTop(computer);
         displayGameTable();
 
-
     }
 
-    public void placeCardOnTop(int index){
-        cardOnTop = person.getCardsInHand().get(index);
-        cardOnTop.turnCard();
-        person.cardsInHand.remove(index);
+    public void placeCardOnTop(Player player){
+        int index = player.pickCard();
+        cardOnTop = player.getCardsInHand().get(index -1);
+        if (!cardOnTop.faceDown) cardOnTop.turnCard();
+
+        player.cardsInHand.remove(index-1);
+        cardsOnTable.addCardToPile(cardOnTop);
     }
+
+   
 
     private static void clearScreen() { 
         
@@ -62,10 +72,15 @@ public class Game{
         
         if (cardOnTop == null){System.out.println(blankCard);}
         else{System.out.println(cardOnTop.toString());}
+        System.out.println("Cards on pile " + cardsOnTable.getSizeOfPile());
     }
 
     public void displayGameTable(){
+        computer.displayCardsInhand();
+        System.out.println("\n \n");
+
        displayCardsOnTable();
+
         System.out.println("\n \n");
         person.displayCardsInhand();
     }

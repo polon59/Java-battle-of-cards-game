@@ -7,23 +7,40 @@ import java.io.IOException;
 
 public class Card {
     int rank;
-    int suit;
+    Color color;
     boolean faceDown;
 
-    public Card(int rank, int suit, boolean faceDown) {
+    public Card(int rank, Color color, boolean faceDown) {
         this.rank = rank;
-        this.suit = suit;
+        this.color = color;
         this.faceDown = faceDown;
     }
-
-    public boolean checkIfCardIsRed(){
-        if (suit == 1 || suit == 2){
-            return true;
-        }
-        else{
-            return false;
-        }
+    public int getRank() {
+        return rank;
     }
+    public Color getColor() {
+        return color;
+    }
+    public boolean getFaceDown(){
+        return faceDown;
+    }
+    public void setFaceDown(boolean faceDown) {
+        this.faceDown = faceDown;
+    }
+    public boolean isSameColor(Card card) {
+        return this.getColor().equals(card.getColor());
+    }
+    public boolean isSameRank(Card card) {
+        return this.getRank() == card.getRank();
+    }
+    // public boolean checkIfCardIsRed(){
+    //     if (suit == 1 || suit == 2){
+    //         return true;
+    //     }
+    //     else{
+    //         return false;
+    //     }
+    // }
 
     public void turnCard(){
         // if (faceDown) {faceDown = false;}
@@ -73,7 +90,7 @@ public class Card {
             cardImageInColor = ANSI_BLUE + cardImage + ANSI_RESET;
         }
         else{
-            if (checkIfCardIsRed()){
+            if (this.getColor().equals(Color.RED)){
                 cardImageInColor = ANSI_RED + cardImage + ANSI_RESET;
             }
             else{
@@ -84,5 +101,9 @@ public class Card {
         
 
         return cardImageInColor;
+    }
+    public enum Color {
+        RED,
+        BLACK;
     }
 }
