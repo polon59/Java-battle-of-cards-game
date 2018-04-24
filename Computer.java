@@ -6,6 +6,9 @@ public class Computer extends Player {
 
     public Computer(Deck deck) {
         drawCards(deck);
+        for (int i =0; i< super.cardsInHand.size(); i++){
+            super.cardsInHand.get(i).turnCard();
+        }
     }
 
     public int pickCard(){

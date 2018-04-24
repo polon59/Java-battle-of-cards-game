@@ -17,6 +17,8 @@ public class Game{
         deck.createCards();
         person = new Person(deck);
         computer = new Computer(deck);
+        cardsOnTable = new Deck();
+        runGame();
     }
 
     public void runGame(){
@@ -24,28 +26,27 @@ public class Game{
         clearScreen();
         SetPatternCard();
 
+
         displayGameTable();
-        sleep(3);
+        placeCardOnTop(person);
         clearScreen();
 
         displayGameTable();
-        placeCardOnTop(person.pickCard());
-        clearScreen();
-
+        placeCardOnTop(computer);
         displayGameTable();
-        placeCardOnTop(person.pickCard());
-        displayGameTable();
-
-
-
 
     }
 
-    public void placeCardOnTop(int index){
-        cardOnTop = person.getCardsInHand().get(index -1);
-        cardOnTop.turnCard();
-        person.cardsInHand.remove(index-1);
+    public void placeCardOnTop(Player player){
+        int index = player.pickCard();
+        cardOnTop = player.getCardsInHand().get(index -1);
+        if (!cardOnTop.faceDown) cardOnTop.turnCard();
+
+        player.cardsInHand.remove(index-1);
+        cardsOnTable.addCardToPile(cardOnTop);
     }
+
+   
 
     private static void clearScreen() { 
         
@@ -71,10 +72,15 @@ public class Game{
         
         if (cardOnTop == null){System.out.println(blankCard);}
         else{System.out.println(cardOnTop.toString());}
+        System.out.println("Cards on pile " + cardsOnTable.getSizeOfPile());
     }
 
     public void displayGameTable(){
+        computer.displayCardsInhand();
+        System.out.println("\n \n");
+
        displayCardsOnTable();
+
         System.out.println("\n \n");
         person.displayCardsInhand();
     }
