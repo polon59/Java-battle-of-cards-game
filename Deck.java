@@ -27,7 +27,7 @@ public class Deck {
     public void addCardToPile(Card card) {
         listOfCards.add(card);
     }
-    public removeCardFromPile(Card card) {
+    public void removeCardFromPile(Card card) {
         listOfCards.remove(card);
     }
     public Card getCard(int i) {
