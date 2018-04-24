@@ -8,9 +8,9 @@ public class Computer extends Player {
         drawCards(deck);
     }
 
-    public Card pickCard() {
+    public int pickCard() {
         int cardIndex = generator.nextInt(cardsInHand.size());
-        return cardsInHand.get(cardIndex);    
+        return cardIndex;    
     }
 
         
