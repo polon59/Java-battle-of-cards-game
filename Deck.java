@@ -40,6 +40,9 @@ public class Deck {
     public int getSizeOfPile() {
         return listOfCards.size();
     }
+    public void clear(){
+        listOfCards.clear();
+    }
     // public boolean isCardValid(Card card1, Card card2) {
     //     if(card1.isSameColor(card2) || card1.isSameRank(card2)) {
     //         return true;

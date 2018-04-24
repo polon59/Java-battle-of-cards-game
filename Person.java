@@ -10,7 +10,7 @@ public class Person extends Player{
 
     public int pickCard(){
         int cardIndex = reader.nextInt();
-        return cardIndex;
+        return cardIndex -1;
     }
 
     

@@ -12,7 +12,7 @@ public class Computer extends Player {
     }
 
     public int pickCard(){
-        int cardIndex = generator.nextInt(cardsInHand.size());
+        int cardIndex = generator.nextInt(super.cardsInHand.size());
         return cardIndex;
     }
 
