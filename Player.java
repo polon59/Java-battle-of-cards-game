@@ -58,10 +58,7 @@ public void displayCardsInhand(){
                     System.out.print(ANSI_BLACK + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + 
                     " " + ANSI_RESET); 
                 }
-            }
-            
-            
-            
+            } 
 
         }
         System.out.print("\n");
