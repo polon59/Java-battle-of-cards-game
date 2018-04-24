@@ -28,22 +28,11 @@ public class Card {
         this.faceDown = faceDown;
     }
     public boolean isSameColor(Card card) {
-        if (this.getColor().equals(card.getColor())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.getColor().equals(card.getColor());
     }
     public boolean isSameRank(Card card) {
-        if (this.getRank() == card.getRank()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.getRank() == card.getRank();
     }
-
     // public boolean checkIfCardIsRed(){
     //     if (suit == 1 || suit == 2){
     //         return true;
