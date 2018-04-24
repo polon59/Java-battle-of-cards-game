@@ -8,17 +8,19 @@ public abstract class Player{
 
 public abstract Card pickCard();
 
-public List<Card> drawCards(List<Card> list) {
+public void drawCards(Deck deck) {
+    List<Card> list = deck.getListOfCards();
+    this.cardsInHand = new ArrayList<>();
     cardsInHand = new ArrayList<>();
     for (int i = 0; i < 9; i++) {
         cardsInHand.add(list.get(i));
         list.remove(i);
     }
-    return cardsInHand;
+    
 }
 
 public List<Card> getCardsInHand(){
-    return cardsInHand;
+    return this.cardsInHand;
 }
 
 public void displayCardsInhand(){
