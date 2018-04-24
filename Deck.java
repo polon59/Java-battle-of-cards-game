@@ -38,20 +38,20 @@ public class Deck {
     public int getSizeOfPile() {
         return listOfCards.size();
     }
-    public boolean isCardValid(Card card1, Card card2) {
-        if(card1.isSameColor(card2) || card1.isSameRank(card2)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public boolean checkIfCheated(Card card1, Card card2){
-        if (isCardValid(card1, card2)) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
+    // public boolean isCardValid(Card card1, Card card2) {
+    //     if(card1.isSameColor(card2) || card1.isSameRank(card2)) {
+    //         return true;
+    //     }
+    //     else {
+    //         return false;
+    //     }
+    // }
+    // public boolean checkIfCheated(Card card1, Card card2){
+    //     if (isCardValid(card1, card2)) {
+    //         return false;
+    //     }
+    //     else {
+    //         return true;
+    //     }
+    // }
 }
