@@ -12,9 +12,4 @@ public class Person extends Player{
         int cardIndex = reader.nextInt();
         return cardsInHand.get(cardIndex);
     }
-    
-
-    
-
-
 }

@@ -21,6 +21,14 @@ public abstract class Player{
         return this.cardsInHand;
     }
 
+    public void moveCard(Card card, Deck destPile){
+        }
+
+    public void check(){
+
+    }
+
+
     public void displayCardsInhand(){
         int allLines = 6;
         final String ANSI_RESET = "\u001B[0m";
@@ -51,9 +59,5 @@ public abstract class Player{
             }
             System.out.print("\n");
         } 
-}
-
-
-
-
+    }
 }
