@@ -1,8 +1,10 @@
 import java.util.List;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Person extends Player{
     Scanner reader = new Scanner(System.in);
+
 
     public Person(Deck deck) {
         drawCards(deck);
