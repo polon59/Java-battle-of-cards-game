@@ -14,6 +14,7 @@ public class Game{
 
     public Game(){
         deck = new Deck();
+        deck.createCards();
         person = new Person(deck);
         computer = new Computer(deck);
     }
