@@ -25,10 +25,19 @@ public class Card {
         }
     }
 
+    public void turnCard(){
+        // if (faceDown) {faceDown = false;}
+        // else{faceDown = true;}
+        faceDown = !faceDown;
+        
+    }
+
     public ArrayList<String> readASCIIfromFile() {
         ArrayList<String> lines = new ArrayList<>();
-        String fileName = rank + ".txt";
-        
+        String fileName; 
+        if (faceDown){fileName = "cardASCII/cardback.txt";}
+        else{fileName = "cardASCII/" + rank + ".txt";}
+
         
         try{
             Scanner fileReaded = new Scanner(new File(fileName));
@@ -50,6 +59,7 @@ public class Card {
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_BLACK = "\u001B[30m";
         final String ANSI_RED = "\u001B[31m";
+        final String ANSI_BLUE = "\u001B[34m";
         String cardImageInColor;
         String cardImage = "";
         ArrayList<String> cardLines = readASCIIfromFile();
@@ -59,12 +69,19 @@ public class Card {
             cardImage += cardLines.get(i) + "\n";
         }
 
-        if (checkIfCardIsRed()){
-            cardImageInColor = ANSI_RED + cardImage + ANSI_RESET;
+        if (faceDown){
+            cardImageInColor = ANSI_BLUE + cardImage + ANSI_RESET;
         }
         else{
-            cardImageInColor = ANSI_BLACK + cardImage + ANSI_RESET;
+            if (checkIfCardIsRed()){
+                cardImageInColor = ANSI_RED + cardImage + ANSI_RESET;
+            }
+            else{
+                cardImageInColor = ANSI_BLACK + cardImage + ANSI_RESET;
+            }
         }
+
+        
 
         return cardImageInColor;
     }
