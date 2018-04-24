@@ -7,9 +7,11 @@ public class Deck {
 
     private static final int FIRST_CARD = 0;
 
-    public Deck() {
-        
-        listOfCards = new ArrayList<>();
+    public Deck() {        
+        listOfCards = new ArrayList<>();    
+    }
+
+    public void createCards(){
         for (int suit = 1; suit < 5; suit++) {
             for (int rank = 1; rank < 14; rank++) {
                 listOfCards.add(new Card(rank, suit, true));
