@@ -16,7 +16,6 @@ public class Deck {
         shuffle();
     }
     
-
     public List<Card> getListOfCards(){ 
         return listOfCards;
     }
@@ -25,5 +24,13 @@ public class Deck {
         Collections.shuffle(listOfCards);
     }
 
-    
+    public void addCardToPile(Card card) {
+        listOfCards.add(card);
+    }
+    public removeCardFromPile(Card card) {
+        listOfCards.remove(card);
+    }
+    public Card getCard(int i) {
+        return listOfCards.get(i);
+    }
 }
