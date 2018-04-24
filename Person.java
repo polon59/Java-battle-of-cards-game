@@ -8,8 +8,8 @@ public class Person extends Player{
         drawCards(deck);
     }
 
-    public Card pickCard(){
+    public int pickCard(){
         int cardIndex = reader.nextInt();
-        return cardsInHand.get(cardIndex);
+        return cardIndex;
     }
 }

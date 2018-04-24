@@ -20,22 +20,30 @@ public class Game{
 
     public void runGame(){
         //losowanie pierwszej karty
+        clearScreen();
         SetPatternCard();
 
         displayGameTable();
         sleep(3);
         clearScreen();
-        
-        placeCardOnTop(2);
+
         displayGameTable();
+        placeCardOnTop(person.pickCard());
+        clearScreen();
+
+        displayGameTable();
+        placeCardOnTop(person.pickCard());
+        displayGameTable();
+
+
 
 
     }
 
     public void placeCardOnTop(int index){
-        cardOnTop = person.getCardsInHand().get(index);
+        cardOnTop = person.getCardsInHand().get(index -1);
         cardOnTop.turnCard();
-        person.cardsInHand.remove(index);
+        person.cardsInHand.remove(index-1);
     }
 
     private static void clearScreen() { 
