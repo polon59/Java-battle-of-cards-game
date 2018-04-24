@@ -15,8 +15,8 @@ public class Main{
             System.out.println(person.getCardsInHand().get(i).toString());
         }
         person.displayCardsInhand();
-        // person.cardsInHand.remove(2);
-        // person.displayCardsInhand();
+        person.cardsInHand.remove(2);
+        person.displayCardsInhand();
 
     }
 }

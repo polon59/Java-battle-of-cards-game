@@ -3,7 +3,7 @@ import java.util.List;
 public class Person extends Player{
 
     public Person(Deck deck) {
-        super.cardsInHand = drawCards(deck.getListOfCards());
+        drawCards(deck);
     }
 
     public Card pickCard(){
