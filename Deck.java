@@ -29,7 +29,7 @@ public class Deck {
     public void addCardToPile(Card card) {
         listOfCards.add(card);
     }
-    public removeCardFromPile(Card card) {
+    public void removeCardFromPile(Card card) {
         listOfCards.remove(card);
     }
     public Card getCard(int i) {
@@ -46,8 +46,8 @@ public class Deck {
             return false;
         }
     }
-    public boolean checkIfCheated(){
-        if (isCardValid()) {
+    public boolean checkIfCheated(Card card1, Card card2){
+        if (isCardValid(card1, card2)) {
             return false;
         }
         else {
