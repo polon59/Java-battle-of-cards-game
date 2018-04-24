@@ -1,9 +1,10 @@
 import java.util.List;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.lang.Integer;
 
 public class Person extends Player{
-    Scanner reader = new Scanner(System.in);
+    Scanner reader;
 
 
     public Person(Deck deck) {
@@ -15,18 +16,18 @@ public class Person extends Player{
         int cardIndex = 1;
 
         while(isWrongInput){
+            reader = new Scanner(System.in);
             System.out.println("Please enter a number of card between 1 and " + super.cardsInHand.size());
             try{
-                isWrongInput = false;
-                cardIndex = reader.nextInt(); 
+                cardIndex = reader.nextInt();
+                if(cardIndex > 0 && cardIndex < super.cardsInHand.size()+1){
+                    isWrongInput = false;
+                }
             }
-            catch(Exception InputMismatchException){
+            catch(InputMismatchException e){
                 System.out.println("Wrong input, try again");
-                isWrongInput = true;
             }
         }
         return cardIndex;
     }
-
-    
 }
