@@ -1,6 +1,6 @@
 import java.util.concurrent.TimeUnit;
 
-public class Game{
+public class Game {
     Player person;
     Player computer;
 
@@ -9,77 +9,71 @@ public class Game{
 
     Card patternCard;
     Card cardOnTop;
-    
 
-
-    public Game(){
+    public Game() {
         deck = new Deck();
         deck.createCards();
         person = new Person(deck);
         computer = new Computer(deck);
         cardsOnTable = new Deck();
-        runGame();
-    }
-
-    public void runGame(){
-        //losowanie pierwszej karty
-        clearScreen();
-        SetPatternCard();
-
-
-        displayGameTable();
-        placeCardOnTop(person);
-        clearScreen();
-
-        displayGameTable();
-        placeCardOnTop(computer);
-        displayGameTable();
 
     }
 
-    public void placeCardOnTop(Player player){
-        int index = player.pickCard(cardsOnTable);
-        cardOnTop = player.getCardsInHand().get(index -1);
-        if (!cardOnTop.faceDown) cardOnTop.turnCard();
+    public void runGame() {
 
-        player.cardsInHand.remove(index-1);
-        cardsOnTable.addCardToPile(cardOnTop);
-    }
+        setPatternCard();
 
-   
-
-    private static void clearScreen() { 
-        
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();   
-    } 
-    
-    private static void sleep(int seconds){
-        try{
-            TimeUnit.SECONDS.sleep(2);
+        while (person.getCardsInHand().size() > 0 || computer.getCardsInHand().size() > 0) {
+            displayGameTable();
+            person.move(computer, cardsOnTable, patternCard);
+            displayGameTable();
+            computer.move(person, cardsOnTable, patternCard);
         }
-        catch(InterruptedException e){};
+
+        if (person.getCardsInHand().size() == 0) {
+            System.out.println("PLAYER WINS");
+        } else {
+            System.out.println("COMPUTER WINS");
+        }
+
     }
 
-    public void SetPatternCard(){
-         patternCard = deck.getListOfCards().get(0);
+    private static void clearScreen() {
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    private static void sleep(int seconds) {
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+        }
+        ;
+    }
+
+    public void setPatternCard() {
+        patternCard = deck.getLastCard();
         //deck.remove card from deck (int index = 0)
     }
 
-    public void displayCardsOnTable(){
+    public void displayCardsOnTable() {
         String blankCard = "_______\n|     |\n|     |\n| PILE|\n|     |\n|_____|";
-        System.out.println(patternCard.toString());
-        
-        if (cardOnTop == null){System.out.println(blankCard);}
-        else{System.out.println(cardOnTop.toString());}
+        System.out.println(patternCard);
+
+        if (cardsOnTable.getSizeOfPile() == 0) {
+            System.out.println(blankCard);
+        } else {
+            System.out.println(cardsOnTable.getFirstCard());
+        }
         System.out.println("Cards on pile " + cardsOnTable.getSizeOfPile());
     }
 
-    public void displayGameTable(){
+    public void displayGameTable() {
         computer.displayCardsInhand();
         System.out.println("\n \n");
 
-       displayCardsOnTable();
+        displayCardsOnTable();
 
         System.out.println("\n \n");
         person.displayCardsInhand();

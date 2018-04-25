@@ -6,15 +6,15 @@ public class Computer extends Player {
 
     public Computer(Deck deck) {
         drawCards(deck);
-        for (int i =0; i< super.cardsInHand.size(); i++){
+        for (int i = 0; i < super.cardsInHand.size(); i++) {
             super.cardsInHand.get(i).turnCard();
         }
     }
 
-    public void move(Player opponent, Deck deck) {
+    public void move(Player opponent, Deck deck, Card patternCard) {
     }
 
-    public int pickCard(Deck deck){
+    public int pickCard(Deck deck) {
         int cardIndex = generator.nextInt(super.cardsInHand.size());
         return cardIndex;
     }
@@ -31,9 +31,5 @@ public class Computer extends Player {
         // else return 2;
         return 1;
     }
-        
-        
+
 }
-
-
-
