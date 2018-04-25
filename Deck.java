@@ -43,14 +43,20 @@ public class Deck {
     public int getSizeOfPile() {
         return listOfCards.size();
     }
-     public Card getCard(int i) {
-        return listOfCards.get(i);
-    }
     public Card getFirstCard(){
         return getCard(FIRST_CARD);
     }
-    public getLastCard(){
+    public Card getLastCard(){
         return getCard(getSizeOfPile());
+    }
+    public boolean isCardValid(){
+        if (getSizeOfPile() == 1) {
+            return true;
+        }
+        return checkColorAndRank();
+    }
+    private boolean checkColorAndRank(){
+        return (getFirstCard().getRank() == getLastCard().getRank() || getFirstCard().getColor().equals(getLastCard().getColor()));
     }
 
 }
