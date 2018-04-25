@@ -52,5 +52,8 @@ public class Deck {
     public boolean isCardValid(){
         return (getFirstCard().getRank() == getLastCard().getRank() || getFirstCard().getColor().equals(getLastCard().getColor()));
     }
+    public void clearPile(){
+        listOfCards.clear();
+    }
 
 }
