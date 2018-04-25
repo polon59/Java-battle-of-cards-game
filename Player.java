@@ -25,11 +25,11 @@ public void addCardsFromPile(Deck pileOnTable){
         this.cardsInHand.add(card);
     }
 }
-public void check(){Deck pileOnTable, Player opponent}{
+public void check(Deck pileOnTable, Player opponent){
     if (pileOnTable.getSizeOfPile() == 1){
-        break;
+        return;
     }
-    if (isCardValid()){
+    if (pileOnTable.isCardValid()){
         this.addCardsFromPile(pileOnTable);
     }
     else {
