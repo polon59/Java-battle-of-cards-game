@@ -11,9 +11,14 @@ public class Computer extends Player {
         }
     }
 
-    public int pickCard(){
+    public int pickCard(Deck deck){
+        
         int cardIndex = generator.nextInt(super.cardsInHand.size());
         return cardIndex;
+    }
+
+    private int chooseRandomCard() {
+        return generator.nextInt(super.cardsInHand.size());
     }
 
         
