@@ -23,13 +23,15 @@ public class Game{
 
     public void runGame(){
         //losowanie pierwszej karty
-        clearScreen();
+        boolean gameRunning = true;
         SetPatternCard();
 
-        for (int a =0; a <2; a++){
+
+        while (gameRunning){
+            
             clearScreen();
             displayGameTable();
-            placeCardOnTop(person);
+            playerMove(person, computer);
             clearScreen();
             displayGameTable();
 
@@ -37,69 +39,66 @@ public class Game{
             sleep(1);
             clearScreen();
             displayGameTable();
-            placeCardOnTop(computer);
-            clearScreen();
-            displayGameTable();
-            sleep(1);
+            
+            playerMove(computer, person);
+            
         }
+    }
 
 
+    public void addCardsOnTableToPlayer(Player playerWhoTakeCards){
 
-        
-        
+        Card cardToAdd;
 
-
-        clearScreen();
-        //SetPatternCard();
-
-        displayGameTable();
-        System.out.println("Player turn");
-        placeCardOnTop(person);
-        clearScreen();
-        displayGameTable();
-
-
-        
         for (int i =0; i<cardsOnTable.getSizeOfPile(); i++){
-            Card cardToAdd = cardsOnTable.getCard(i);
+            cardToAdd = cardsOnTable.getCard(i);
             cardToAdd.turnCard();
-            person.cardsInHand.add(cardToAdd);
-        
+            playerWhoTakeCards.cardsInHand.add(cardToAdd);
         }
         cardsOnTable.clear();
         this.cardOnTop = null;
-        System.out.println("chuj");
-        displayGameTable();
-        sleep(5);
-        clearScreen();
-        System.out.println("Comp turn");
-        placeCardOnTop(computer);
-        clearScreen();
-        displayGameTable();
-        sleep(1);
-
-
-            
-
-        
-
     }
 
-    public void placeCardOnTop(Player player){
-        int index = player.pickCard();
-        cardOnTop = player.getCardsInHand().get(index);
-        if (!cardOnTop.faceDown) cardOnTop.turnCard();
 
+    public void playerMove(Player player, Player opponent){
+        //int choice = player.ChooseOption()
+
+        int index = player.pickCard();
+        
+        cardOnTop = player.getCardsInHand().get(index);
+
+        if (!cardOnTop.faceDown) {cardOnTop.turnCard();}
         player.cardsInHand.remove(index);
         cardsOnTable.addCardToPile(cardOnTop);
+
+
+        // place card
+    //     if (choice == 1){
+    //         int index = player.pickCard();
+            
+    //         cardOnTop = player.getCardsInHand().get(index);
+    
+    //         if (!cardOnTop.faceDown) {cardOnTop.turnCard();}
+    //         player.cardsInHand.remove(index);
+    //         cardsOnTable.addCardToPile(cardOnTop);
+    //     }
+
+    //     // check opponent
+    //     else{
+    //         if cardOnTop is valid{addCardsOnTableToPlayer(player);}
+    //         else{addCardsOnTableToPlayer(opponent);}
+    //     }
+
     }
+
+
 
    
 
     private static void clearScreen() { 
         
         System.out.print("\033[H\033[2J");  
-        System.out.flush();   
+        System.out.flush();
     } 
     
     private static void sleep(int seconds){
