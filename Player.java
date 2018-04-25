@@ -20,7 +20,22 @@ public void drawCards(Deck deck) {
     }
     
 }
-
+public void addCardsFromPile(Deck pileOnTable){
+    for (Card card: pileOnTable.getListOfCards()){
+        this.cardsInHand.add(card);
+    }
+}
+public void check(){Deck pileOnTable, Player opponent}{
+    if (pileOnTable.getSizeOfPile() == 1){
+        break;
+    }
+    if (isCardValid()){
+        this.addCardsFromPile(pileOnTable);
+    }
+    else {
+        opponent.addCardsFromPile(pileOnTable);
+    }
+}
 public List<Card> getCardsInHand(){
     return this.cardsInHand;
 }
