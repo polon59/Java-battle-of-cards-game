@@ -23,12 +23,8 @@ public abstract class Player {
 
     }
 
-    public void addCardsFromPile(Deck pileOnTable) {
-        for (Card card : pileOnTable.getListOfCards()) {
-            this.cardsInHand.add(card);
-        }
-    }
-
+    public abstract void addCardsFromPile(Deck pileOnTable);
+    
     public void check(Deck pileOnTable, Player opponent, Card patternCard) {
         if (pileOnTable.getSizeOfPile() == 0) {
             System.out.println("Can't check your opponent's move, there hasn't been");

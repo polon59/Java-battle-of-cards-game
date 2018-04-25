@@ -20,6 +20,13 @@ public class Person extends Player{
         } 
     }
 
+    public void addCardsFromPile(Deck pileOnTable) {
+        for (Card card : pileOnTable.getListOfCards()) {
+            card.setFaceDown(false);
+            this.cardsInHand.add(card);
+        }
+    }
+
     private void placeCardOnTop(Deck deck) {
         int index = pickCard(deck);
         Card chosenCard = getCardsInHand().get(index);

@@ -19,6 +19,13 @@ public class Computer extends Player {
         return cardIndex;
     }
 
+    public void addCardsFromPile(Deck pileOnTable) {
+        for (Card card : pileOnTable.getListOfCards()) {
+            card.setFaceDown(true);
+            this.cardsInHand.add(card);
+        }
+    }
+
     private int chooseRandomCard() {
         return generator.nextInt(super.cardsInHand.size());
     }
