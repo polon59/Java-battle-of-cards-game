@@ -5,6 +5,7 @@ import java.util.List;
 public abstract class Player {
 
     public List<Card> cardsInHand;
+    final String ANSI_RESET = "\u001B[0m";
 
     public abstract int pickCard(Deck deck, Card patternCard);
 
@@ -37,7 +38,6 @@ public abstract class Player {
             cardsInHand.add(list.get(i));
             list.remove(i);
         }
-
     }
 
     public void check(Deck pileOnTable, Player opponent, Card patternCard) {
@@ -57,47 +57,67 @@ public abstract class Player {
         }
     }
 
+
     public List<Card> getCardsInHand() {
         return this.cardsInHand;
     }
 
+
     public void displayCardsInhand() {
         int allLines = 6;
-        final String ANSI_RESET = "\u001B[0m";
-        final String ANSI_BLACK = "\u001B[30m";
-        final String ANSI_RED = "\u001B[31m";
-        final String ANSI_BLUE = "\u001B[34m";
-
-        for (int cardIndex = 0; cardIndex < cardsInHand.size(); cardIndex++) {
-            if (cardIndex < 10) {
-                System.out.print(cardIndex + 1 + "       ");
-            } else {
-                System.out.print(cardIndex + 1 + "      ");
-            }
-        }
-
+        
+        displayCardIndexes();
         System.out.println();
 
         for (int currentLineNumber = 0; currentLineNumber < allLines; currentLineNumber++) {
 
             for (int i = 0; i < cardsInHand.size(); i++) {
                 if (cardsInHand.get(i).faceDown) {
-                    System.out.print(ANSI_BLUE + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
-                            + ANSI_RESET);
-
-                } else {
+                    displayLineInBlue(i, currentLineNumber);
+                } 
+                else {
                     if (cardsInHand.get(i).getColor().equals(Card.Color.RED)) {
-                        System.out.print(ANSI_RED + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
-                                + ANSI_RESET);
+                        displayLineInRed(i, currentLineNumber);
                     } else {
-                        System.out.print(ANSI_BLACK + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber)
-                                + " " + ANSI_RESET);
+                        displayLineInBlack(i, currentLineNumber);
                     }
                 }
-
             }
             System.out.print("\n");
         }
+    }
+
+    private void displayCardIndexes(){
+        
+        for (int cardIndex = 0; cardIndex < cardsInHand.size(); cardIndex++) {
+            
+            if (cardIndex < 10) {System.out.print(cardIndex + 1 + "       ");} 
+            else {System.out.print(cardIndex + 1 + "      ");}
+        }
+    }
+        
+        
+    private void displayLineInBlue(int i, int currentLineNumber){
+        final String ANSI_BLUE = "\u001B[34m";
+
+        System.out.print(ANSI_BLUE + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
+        + ANSI_RESET);
+    }
+
+
+    private void displayLineInRed(int i, int currentLineNumber){
+        final String ANSI_RED = "\u001B[31m";
+
+        System.out.print(ANSI_RED + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
+        + ANSI_RESET);
+    }
+
+    
+    private void displayLineInBlack(int i, int currentLineNumber){
+        final String ANSI_BLACK = "\u001B[30m";
+
+        System.out.print(ANSI_BLACK + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber)
+        + " " + ANSI_RESET);
     }
 
 }
