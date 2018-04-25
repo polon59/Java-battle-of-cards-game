@@ -6,7 +6,7 @@ public abstract class Player{
 
     public List<Card> cardsInHand;
 
-public abstract int pickCard();
+public abstract int pickCard(Deck deck);
 
 public void drawCards(Deck deck) {
     List<Card> list = deck.getListOfCards();
