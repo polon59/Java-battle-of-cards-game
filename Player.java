@@ -27,6 +27,7 @@ public void addCardsFromPile(Deck pileOnTable){
 }
 public void check(Deck pileOnTable, Player opponent){
     if (pileOnTable.getSizeOfPile() == 1){
+        System.out.println("Can't check your opponent's move, there hasn't been")
         return;
     }
     if (pileOnTable.isCardValid()){
