@@ -24,12 +24,24 @@ public class Game {
         setPatternCard();
 
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
+            clearScreen();
             displayGameTable();
             person.move(computer, cardsOnTable, patternCard);
+            clearScreen();
             displayGameTable();
+            sleep(1);
             computer.move(person, cardsOnTable, patternCard);
+            displayGameTable();
+            if(computer.getCardsInHand().size() == 0) {
+                clearScreen();
+                displayGameTable();
+                person.move(computer, cardsOnTable, patternCard);
+                displayGameTable();
+            }
         }
-
+        clearScreen();
+        cardsOnTable.getFirstCard().turnCard();
+        displayGameTable();
         if (person.getCardsInHand().size() == 0) {
             System.out.println("PLAYER WINS");
         } else {
@@ -48,13 +60,12 @@ public class Game {
         try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        ;
     }
 
     public void setPatternCard() {
         patternCard = deck.getLastCard();
-        //deck.remove card from deck (int index = 0)
     }
 
     public void displayCardsOnTable() {
