@@ -12,7 +12,6 @@ public class Computer extends Player {
     }
 
     public int pickCard(Deck deck){
-        
         int cardIndex = generator.nextInt(super.cardsInHand.size());
         return cardIndex;
     }
@@ -21,6 +20,13 @@ public class Computer extends Player {
         return generator.nextInt(super.cardsInHand.size());
     }
 
+    public int chooseOption(Deck deck) {
+        if(deck.getSizeOfPile() < 5) {
+            return 1;
+        } else if (haveValidCard) {
+            return generator.nextInt(2) + 1; }
+        else return 2;
+    }
         
         
 }
