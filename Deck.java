@@ -50,13 +50,10 @@ public class Deck {
         return getCard(getSizeOfPile());
     }
     public boolean isCardValid(){
-        if (getSizeOfPile() == 1) {
-            return true;
-        }
-        return checkColorAndRank();
-    }
-    private boolean checkColorAndRank(){
         return (getFirstCard().getRank() == getLastCard().getRank() || getFirstCard().getColor().equals(getLastCard().getColor()));
+    }
+    public void clearPile(){
+        listOfCards.clear();
     }
 
 }

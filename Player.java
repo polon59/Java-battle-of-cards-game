@@ -22,7 +22,25 @@ public void drawCards(Deck deck) {
     }
     
 }
-
+public void addCardsFromPile(Deck pileOnTable){
+    for (Card card: pileOnTable.getListOfCards()){
+        this.cardsInHand.add(card);
+    }
+}
+public void check(Deck pileOnTable, Player opponent){
+    if (pileOnTable.getSizeOfPile() == 1){
+        System.out.println("Can't check your opponent's move, there hasn't been");
+        return;
+    }
+    if (pileOnTable.isCardValid()){
+        this.addCardsFromPile(pileOnTable);
+        pileOnTable.clearPile();
+    }
+    else {
+        opponent.addCardsFromPile(pileOnTable);
+        pileOnTable.clearPile();
+    }
+}
 public List<Card> getCardsInHand(){
     return this.cardsInHand;
 }
