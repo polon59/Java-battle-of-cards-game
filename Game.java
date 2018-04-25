@@ -38,7 +38,7 @@ public class Game{
     }
 
     public void placeCardOnTop(Player player){
-        int index = player.pickCard();
+        int index = player.pickCard(cardsOnTable);
         cardOnTop = player.getCardsInHand().get(index -1);
         if (!cardOnTop.faceDown) cardOnTop.turnCard();
 
