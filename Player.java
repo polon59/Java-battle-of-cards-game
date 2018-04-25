@@ -31,9 +31,11 @@ public void check(Deck pileOnTable, Player opponent){
     }
     if (pileOnTable.isCardValid()){
         this.addCardsFromPile(pileOnTable);
+        pileOnTable.clearPile();
     }
     else {
         opponent.addCardsFromPile(pileOnTable);
+        pileOnTable.clearPile();
     }
 }
 public List<Card> getCardsInHand(){
