@@ -6,11 +6,26 @@ public abstract class Player {
 
     public List<Card> cardsInHand;
 
-    public abstract int pickCard(Deck deck);
+    public abstract int pickCard(Deck deck, Card patternCard);
 
-    public abstract int chooseOption(Deck deck);
+    public abstract int chooseOption(Deck deck, Card patternCard);
 
-    public abstract void move(Player opponent, Deck deck, Card patternCard);
+    public void move(Player opponent, Deck deck, Card patternCard) {
+        int option = chooseOption(deck, patternCard);
+        if (option == 1) {
+            placeCardOnTop(deck, patternCard);
+        } else { 
+            check(deck, opponent, patternCard);
+        } 
+    }
+
+    public void placeCardOnTop(Deck deck, Card patternCard) {
+        int index = pickCard(deck, patternCard);
+        Card chosenCard = getCardsInHand().get(index);
+        chosenCard.setFaceDown(true);
+        deck.addCardToPile(chosenCard);
+        cardsInHand.remove(index);      
+    }
 
     public void drawCards(Deck deck) {
         List<Card> list = deck.getListOfCards();

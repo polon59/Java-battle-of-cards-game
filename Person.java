@@ -11,15 +11,6 @@ public class Person extends Player{
         drawCards(deck);
     }
 
-    public void move(Player opponent, Deck deck, Card patternCard) {
-        int option = chooseOption(deck);
-        if (option == 1) {
-            placeCardOnTop(deck);
-        } else { 
-            check(deck, opponent, patternCard);
-        } 
-    }
-
     public void addCardsFromPile(Deck pileOnTable) {
         for (Card card : pileOnTable.getListOfCards()) {
             card.setFaceDown(false);
@@ -27,19 +18,11 @@ public class Person extends Player{
         }
     }
 
-    private void placeCardOnTop(Deck deck) {
-        int index = pickCard(deck);
-        Card chosenCard = getCardsInHand().get(index);
-        chosenCard.setFaceDown(true);
-        deck.addCardToPile(chosenCard);
-        cardsInHand.remove(index);      
-    }
-
-    public int chooseOption(Deck deck){
+    public int chooseOption(Deck deck, Card patternCard){
         return foolproofInput("1. Pick card\n2. Check opponent", 2);
     }
     
-    public int pickCard(Deck deck){
+    public int pickCard(Deck deck, Card patternCard){
         int numberOfCardsInHards = super.cardsInHand.size();
         return foolproofInput("Please enter a number of card between 1 and " + numberOfCardsInHards, numberOfCardsInHards) - 1;
     }
