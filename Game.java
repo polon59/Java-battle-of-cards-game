@@ -23,7 +23,7 @@ public class Game {
 
         setPatternCard();
 
-        while (person.getCardsInHand().size() > 0 || computer.getCardsInHand().size() > 0) {
+        while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
             displayGameTable();
             person.move(computer, cardsOnTable, patternCard);
             displayGameTable();
