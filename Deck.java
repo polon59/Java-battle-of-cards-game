@@ -12,11 +12,14 @@ public class Deck {
     }
 
     public void createCards(){
-        for (int suit = 1; suit < 5; suit++) {
-            for (int rank = 1; rank < 14; rank++) {
-                listOfCards.add(new Card(rank, suit, false));
+        for (int i = 0; i< 2; i++){
+            for (Card.Color color: Card.Color.values()) {
+                for (int rank = 1; rank < 14; rank++) {
+                    listOfCards.add(new Card(rank, color, false));
+                }
             }
         }
+        
         shuffle();
     }
     

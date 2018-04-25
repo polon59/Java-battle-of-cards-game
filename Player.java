@@ -50,7 +50,7 @@ public void displayCardsInhand(){
 
             }
             else{
-                if (cardsInHand.get(i).checkIfCardIsRed()){
+                if (cardsInHand.get(i).getColor().equals(Card.Color.RED)){
                     System.out.print(ANSI_RED + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + 
                     " " + ANSI_RESET); 
                 }
@@ -58,10 +58,7 @@ public void displayCardsInhand(){
                     System.out.print(ANSI_BLACK + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + 
                     " " + ANSI_RESET); 
                 }
-            }
-            
-            
-            
+            } 
 
         }
         System.out.print("\n");
