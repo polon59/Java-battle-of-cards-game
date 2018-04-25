@@ -14,10 +14,7 @@ public class Computer extends Player {
     public int pickCard(){
         int cardIndex = generator.nextInt(cardsInHand.size());
         return cardIndex;
-    }
-
-        
-        
+    }       
 }
 
 

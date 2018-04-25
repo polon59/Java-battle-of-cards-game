@@ -11,16 +11,24 @@ public class Person extends Player{
         drawCards(deck);
     }
 
-    public int pickCard(){
-        boolean isWrongInput = true;
-        int cardIndex = 1;
+    public int chooseOption(Deck deck){
+        return foolproofInput("1. Pick card\n2. Check opponent", 2);
+    }
+    
+    public int pickCard(Deck deck){
+        int numberOfCardsInHards = super.cardsInHand.size();
+        return foolproofInput("Please enter a number of card between 1 and " + numberOfCardsInHards, numberOfCardsInHards);
+    }
 
+    public int foolproofInput(String message, int upperBound){
+        boolean isWrongInput = true;
+        int index = 1;
         while(isWrongInput){
             reader = new Scanner(System.in);
-            System.out.println("Please enter a number of card between 1 and " + super.cardsInHand.size());
+            System.out.println(message);
             try{
-                cardIndex = reader.nextInt();
-                if(cardIndex > 0 && cardIndex < super.cardsInHand.size()+1){
+                index = reader.nextInt();
+                if(index > 0 && index < upperBound + 1){
                     isWrongInput = false;
                 }
             }
@@ -28,6 +36,6 @@ public class Person extends Player{
                 System.out.println("Wrong input, try again");
             }
         }
-        return cardIndex;
+        return index;
     }
 }

@@ -8,7 +8,7 @@ public abstract class Player{
 
 public abstract int pickCard(Deck deck);
 
-public abstract int chooseOption();
+public abstract int chooseOption(Deck deck);
 
 public void drawCards(Deck deck) {
     List<Card> list = deck.getListOfCards();
