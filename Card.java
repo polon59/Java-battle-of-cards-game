@@ -39,20 +39,10 @@ public class Card {
     public boolean isSameRank(Card card) {
         return this.getRank() == card.getRank();
     }
-    // public boolean checkIfCardIsRed(){
-    //     if (suit == 1 || suit == 2){
-    //         return true;
-    //     }
-    //     else{
-    //         return false;
-    //     }
-    // }
 
     public void turnCard() {
-        // if (faceDown) {faceDown = false;}
-        // else{faceDown = true;}
-        faceDown = !faceDown;
 
+        faceDown = !faceDown;
     }
 
     public ArrayList<String> readASCIIfromFile() {
@@ -69,7 +59,6 @@ public class Card {
 
             while (fileReaded.hasNextLine()) {
                 lines.add(fileReaded.nextLine());
-                //cardImage += fileReaded.nextLine() + "\n";
             }
 
             fileReaded.close();
