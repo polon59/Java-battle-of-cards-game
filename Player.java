@@ -27,12 +27,12 @@ public void addCardsFromPile(Deck pileOnTable){
         this.cardsInHand.add(card);
     }
 }
-public void check(Deck pileOnTable, Player opponent){
+public void check(Deck pileOnTable, Player opponent, Card patternCard){
     if (pileOnTable.getSizeOfPile() == 1){
         System.out.println("Can't check your opponent's move, there hasn't been");
         return;
     }
-    if (pileOnTable.isCardValid()){
+    if (pileOnTable.isCardValid(patternCard)){
         this.addCardsFromPile(pileOnTable);
         pileOnTable.clearPile();
     }

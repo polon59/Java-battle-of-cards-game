@@ -11,6 +11,21 @@ public class Person extends Player{
         drawCards(deck);
     }
 
+    public void move(Player opponent, Deck deck, Card patternCard) {
+        int option = chooseOption(deck);
+        if (option == 1) {
+            placeCardOnTop(deck);
+        } else { 
+            check(deck, opponent, patternCard);
+        } 
+    }
+
+    private void placeCardOnTop(Deck deck) {
+        int index = pickCard(deck);
+        deck.addCardToPile(getCardsInHand().get(index));
+        cardsInHand.remove(index);      
+    }
+
     public int chooseOption(Deck deck){
         return foolproofInput("1. Pick card\n2. Check opponent", 2);
     }

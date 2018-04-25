@@ -5,8 +5,6 @@ import java.util.List;
 public class Deck {
     List<Card> listOfCards;
 
-    private static final int FIRST_CARD = 0;
-
     public Deck() {        
         listOfCards = new ArrayList<>();    
     }
@@ -43,14 +41,12 @@ public class Deck {
     public int getSizeOfPile() {
         return listOfCards.size();
     }
-    public Card getFirstCard(){
-        return getCard(FIRST_CARD);
-    }
+
     public Card getLastCard(){
         return getCard(getSizeOfPile());
     }
-    public boolean isCardValid(){
-        return (getFirstCard().getRank() == getLastCard().getRank() || getFirstCard().getColor().equals(getLastCard().getColor()));
+    public boolean isCardValid(Card patternCard){
+        return (patternCard.getRank() == getLastCard().getRank() || patternCard.getColor().equals(getLastCard().getColor()));
     }
     public void clearPile(){
         listOfCards.clear();
