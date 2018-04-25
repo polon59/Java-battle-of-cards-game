@@ -11,7 +11,7 @@ public class Person extends Player{
         drawCards(deck);
     }
 
-    public int pickCard(){
+    public int pickCard(Deck deck){
         boolean isWrongInput = true;
         int cardIndex = 1;
 
