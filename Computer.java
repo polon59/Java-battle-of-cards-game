@@ -3,6 +3,7 @@ import java.util.Random;
 
 public class Computer extends Player {
     Random generator = new Random();
+    Card validCard;
 
     public Computer(Deck deck) {
         drawCards(deck);
@@ -11,11 +12,14 @@ public class Computer extends Player {
         }
     }
 
-    public void move(Player opponent, Deck deck, Card patternCard) {
-    }
-
-    public int pickCard(Deck deck) {
-        int cardIndex = generator.nextInt(super.cardsInHand.size());
+    public int pickCard(Deck deck, Card patternCard) {
+        
+        int cardIndex;
+        if (deck.getSizeOfPile() <= 12) {
+            cardIndex = generator.nextInt(cardsInHand.size());
+        } else {
+                cardIndex = cardsInHand.indexOf(validCard);
+        }
         return cardIndex;
     }
 
@@ -26,17 +30,32 @@ public class Computer extends Player {
         }
     }
 
-    private int chooseRandomCard() {
-        return generator.nextInt(super.cardsInHand.size());
+    public int chooseOption(Deck deck, Card patternCard) {
+        int option = 0;
+        if (cardsInHand.size() + deck.getSizeOfPile() == 18) {
+            return option = 2;
+        }
+        else if(deck.getSizeOfPile() < 5) {
+            option = 1;
+        } else if (deck.getSizeOfPile() <= 12) {
+            option = generator.nextInt(2) + 1; 
+        } else if (deck.getSizeOfPile() > 12) {
+            if(haveValidCard(patternCard)) {
+               option = 1;
+            } else {
+                option = 2;
+            }
+        } return option;
     }
 
-    public int chooseOption(Deck deck) {
-        // if(deck.getSizeOfPile() < 5) {
-        //     return 1;
-        // } else if (haveValidCard) {
-        //     return generator.nextInt(2) + 1; }
-        // else return 2;
-        return 1;
+    private boolean haveValidCard(Card patternCard) {
+
+        for(Card card : cardsInHand) {
+            if (card.isSameColor(patternCard) || card.isSameRank(patternCard) ) {
+                validCard = card;
+                return true;
+            } 
+        } return false;
     }
 
 }
