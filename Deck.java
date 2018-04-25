@@ -49,7 +49,7 @@ public class Deck {
     public Card getLastCard(){
         return getCard(getSizeOfPile());
     }
-    private boolean isCardValid(){
+    public boolean isCardValid(){
         return (getFirstCard().getRank() == getLastCard().getRank() || getFirstCard().getColor().equals(getLastCard().getColor()));
     }
 
