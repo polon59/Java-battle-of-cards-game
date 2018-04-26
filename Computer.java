@@ -30,22 +30,30 @@ public class Computer extends Player {
         }
     }
 
-    public int chooseOption(Deck deck, Card patternCard) {
+    public int chooseOption(Deck deck, Card patternCard, Player opponent) {
+        
         int option = 0;
+
         if (cardsInHand.size() + deck.getSizeOfPile() == 18) {
-            return option = 2;
-        }
-        else if(deck.getSizeOfPile() < 5) {
+            option = 2;
+        } 
+        else if (cardsInHand.size() == 1) {
+            if (haveValidCard(patternCard)) {
+                option = 1;
+            } else option = 2;
+        } else if (deck.getSizeOfPile() < 3) {
             option = 1;
-        } else if (deck.getSizeOfPile() <= 12) {
-            option = generator.nextInt(2) + 1; 
-        } else if (deck.getSizeOfPile() > 12) {
-            if(haveValidCard(patternCard)) {
-               option = 1;
-            } else {
-                option = 2;
-            }
-        } return option;
+        }  else {
+            double usedCards = (double) opponent.numOfPutCards / opponent.startHandSize;
+            System.out.println(opponent.numOfPutCards);
+            System.out.println(opponent.startHandSize );
+            System.out.println(usedCards);
+            double chance = getChanceForCheck(usedCards);
+            System.out.println(chance);
+            option = randomChoice(chance);
+        }
+
+        return option;
     }
 
     private boolean haveValidCard(Card patternCard) {
@@ -58,4 +66,18 @@ public class Computer extends Player {
         } return false;
     }
 
+    private int randomChoice(double percent) {
+
+        int randomInt = generator.nextInt(100);
+
+        if (randomInt < percent) {
+            return 2;
+        } else return 1;
+
+    }
+
+    private double getChanceForCheck(double percent) {
+
+        return 540 * Math.pow((percent - 2/3), 2) + 20;
+    }
 }
