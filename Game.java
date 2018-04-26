@@ -1,14 +1,14 @@
 import java.util.concurrent.TimeUnit;
 
 public class Game {
-    Player person;
-    Player computer;
+    private Player person;
+    private Player computer;
 
-    Deck deck;
-    Deck cardsOnTable;
+    private Deck deck;
+    private Deck cardsOnTable;
 
-    Card patternCard;
-    Card cardOnTop;
+    private Card patternCard;
+    private Card cardOnTop;
 
     public Game() {
         deck = new Deck();
@@ -29,7 +29,7 @@ public class Game {
             person.move(computer, cardsOnTable, patternCard);
             clearScreen();
             displayGameTable();
-            sleep(1);
+            // sleep(1);
             computer.move(person, cardsOnTable, patternCard);
             displayGameTable();
             if(computer.getCardsInHand().size() == 0) {
@@ -40,7 +40,7 @@ public class Game {
             }
         }
         clearScreen();
-        cardsOnTable.getFirstCard().turnCard();
+        cardsOnTable.getLastCard().turnCard();
         displayGameTable();
         if (person.getCardsInHand().size() == 0) {
             System.out.println("PLAYER WINS");
@@ -75,7 +75,7 @@ public class Game {
         if (cardsOnTable.getSizeOfPile() == 0) {
             System.out.println(blankCard);
         } else {
-            System.out.println(cardsOnTable.getFirstCard());
+            System.out.println(cardsOnTable.getLastCard());
         }
         System.out.println("Cards on pile " + cardsOnTable.getSizeOfPile());
     }

@@ -6,9 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Card {
-    int rank;
-    Color color;
-    boolean faceDown;
+    private int rank;
+    private Color color;
+    private boolean faceDown;
 
     public Card(int rank, Color color, boolean faceDown) {
         this.rank = rank;

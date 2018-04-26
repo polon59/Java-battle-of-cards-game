@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.lang.Integer;
 
 public class Person extends Player{
-    Scanner reader;
+    private Scanner reader;
 
 
     public Person(Deck deck) {

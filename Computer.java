@@ -2,8 +2,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Computer extends Player {
-    Random generator = new Random();
-    Card validCard;
+    private Random generator = new Random();
+    private Card validCard;
 
     public Computer(Deck deck) {
         drawCards(deck);

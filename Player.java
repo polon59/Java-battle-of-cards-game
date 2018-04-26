@@ -4,7 +4,8 @@ import java.util.List;
 // abstract class for class Player
 public abstract class Player {
 
-    public List<Card> cardsInHand;
+    protected List<Card> cardsInHand;
+    protected int numOfPutCards;
 
     public abstract int pickCard(Deck deck, Card patternCard);
 
@@ -81,7 +82,7 @@ public abstract class Player {
         for (int currentLineNumber = 0; currentLineNumber < allLines; currentLineNumber++) {
 
             for (int i = 0; i < cardsInHand.size(); i++) {
-                if (cardsInHand.get(i).faceDown) {
+                if (cardsInHand.get(i).getFaceDown()) {
                     System.out.print(ANSI_BLUE + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
                             + ANSI_RESET);
 
