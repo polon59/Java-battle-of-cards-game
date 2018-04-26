@@ -32,7 +32,7 @@ public class Game {
             displayGameTable();
             sleep(1);
             computer.move(person, cardsOnTable, patternCard);
-            displayGameTable();
+            // displayGameTable();
             if(computer.getCardsInHand().size() == 0) {
                 clearScreen();
                 displayGameTable();
