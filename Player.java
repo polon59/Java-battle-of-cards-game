@@ -67,19 +67,18 @@ public abstract class Player {
         int allLines = 7; 
         
         displayCardIndexes();
-        System.out.println();
 
         for (int currentLineNumber = 0; currentLineNumber < allLines; currentLineNumber++) {
 
             for (int i = 0; i < cardsInHand.size(); i++) {
                 if (cardsInHand.get(i).faceDown) {
-                    displayLineInBlue(i, currentLineNumber);
+                    displayLineInColor(i, currentLineNumber, "BLUE");
                 } 
                 else {
                     if (cardsInHand.get(i).getColor().equals(Card.Color.RED)) {
-                        displayLineInRed(i, currentLineNumber);
+                        displayLineInColor(i, currentLineNumber, "RED");
                     } else {
-                        displayLineInBlack(i, currentLineNumber);
+                        displayLineInColor(i, currentLineNumber, "BLACK");
                     }
                 }
             }
@@ -94,30 +93,27 @@ public abstract class Player {
             if (cardIndex < 10) {System.out.print(cardIndex + 1 + "       ");} 
             else {System.out.print(cardIndex + 1 + "      ");}
         }
+        System.out.println();
     }
-        
-        
-    private void displayLineInBlue(int i, int currentLineNumber){
+
+    private void displayLineInColor(int i, int currentLineNumber, String color){
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_BLACK = "\u001B[30m";
+        final String ANSI_RED = "\u001B[31m";
         final String ANSI_BLUE = "\u001B[34m";
 
-        System.out.print(ANSI_BLUE + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
-        + ANSI_RESET);
-    }
-
-
-    private void displayLineInRed(int i, int currentLineNumber){
-        final String ANSI_RED = "\u001B[31m";
-
-        System.out.print(ANSI_RED + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
-        + ANSI_RESET);
-    }
-
-
-    private void displayLineInBlack(int i, int currentLineNumber){
-        final String ANSI_BLACK = "\u001B[30m";
-
-        System.out.print(ANSI_BLACK + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber)
-        + " " + ANSI_RESET);
+        if (color == "RED"){
+            System.out.print(ANSI_RED + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
+            + ANSI_RESET);
+        }
+        else if (color == "BLACK"){
+            System.out.print(ANSI_BLACK + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber)
+            + " " + ANSI_RESET);
+        }
+        else{
+            System.out.print(ANSI_BLUE + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
+            + ANSI_RESET);
+        }
     }
 
 }
