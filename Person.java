@@ -10,6 +10,7 @@ public class Person extends Player{
         drawCards(deck);
         sortCards();
         this.startHandSize = cardsInHand.size();
+        this.playerName = "person";
     }
     
 
