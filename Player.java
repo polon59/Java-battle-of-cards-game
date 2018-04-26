@@ -115,7 +115,7 @@ public abstract class Player {
                 } 
                 else {
                     if (cardsInHand.get(i).getColor().equals(Color.RED)) {
-                        displayLineInRed(i, currentLineNumber);
+                        displayLineInColor(i, currentLineNumber, "RED");
                     } else {
                         displayLineInColor(i, currentLineNumber, "BLACK");
                     }

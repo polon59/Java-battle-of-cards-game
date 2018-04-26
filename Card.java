@@ -113,8 +113,4 @@ public class Card {
         return cardImage;  
     }
 
-
-    public enum Color {
-        RED, BLACK;
-    }
 }
