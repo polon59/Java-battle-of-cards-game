@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 // abstract class for class Player
 public abstract class Player {
@@ -60,6 +60,13 @@ public abstract class Player {
 
     public List<Card> getCardsInHand() {
         return this.cardsInHand;
+    }
+    public void sortCards(){
+        Collections.sort(cardsInHand, new Comparator<Card>() {
+            public int compare(Card card1, Card card2) {
+                return card1.getRank().compareTo(card2.getRank());
+            }
+        });
     }
 
 
