@@ -24,12 +24,9 @@ public class Game {
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
             performRound(person, computer);
             performRound(computer, person);
-            // personRound();
-            // computerRound();
 
             if (computer.checkIfPlayerHasNoCards()) {
                 performRound(person, computer);
-                //personRound();
             }
         }
         performFinalCheck();
