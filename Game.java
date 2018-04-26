@@ -22,6 +22,7 @@ public class Game {
     public void runGame() {
 
         setPatternCard();
+       
 
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
             clearScreen();
@@ -31,7 +32,7 @@ public class Game {
             displayGameTable();
             // sleep(1);
             computer.move(person, cardsOnTable, patternCard);
-            displayGameTable();
+            // displayGameTable();
             if(computer.getCardsInHand().size() == 0) {
                 clearScreen();
                 displayGameTable();
@@ -69,7 +70,7 @@ public class Game {
     }
 
     public void displayCardsOnTable() {
-        String blankCard = "_______\n|     |\n|     |\n| PILE|\n|     |\n|_____|";
+        String blankCard = "\n\n\n\n\n";
         System.out.println(patternCard);
 
         if (cardsOnTable.getSizeOfPile() == 0) {
@@ -82,11 +83,11 @@ public class Game {
 
     public void displayGameTable() {
         computer.displayCardsInhand();
-        System.out.println("\n \n");
+        System.out.println("\n");
 
         displayCardsOnTable();
 
-        System.out.println("\n \n");
+        System.out.println("\n");
         person.displayCardsInhand();
     }
 }
