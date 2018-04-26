@@ -64,7 +64,7 @@ public abstract class Player {
 
 
     public void displayCardsInhand() {
-        int allLines = 6;
+        int allLines = 7; //changed from 6 for new ascii testing
         
         displayCardIndexes();
         System.out.println();
@@ -112,7 +112,7 @@ public abstract class Player {
         + ANSI_RESET);
     }
 
-    
+
     private void displayLineInBlack(int i, int currentLineNumber){
         final String ANSI_BLACK = "\u001B[30m";
 
