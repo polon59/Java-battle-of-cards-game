@@ -64,7 +64,7 @@ public abstract class Player {
 
 
     public void displayCardsInhand() {
-        int allLines = 7; //changed from 6 for new ascii testing
+        int allLines = 7; 
         
         displayCardIndexes();
         System.out.println();
