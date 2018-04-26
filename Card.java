@@ -7,11 +7,13 @@ import java.io.IOException;
 
 public class Card {
     Rank rank;
+    Suit suit;
     Color color;
     boolean faceDown;
 
-    public Card(Rank rank, Color color, boolean faceDown) {
+    public Card(Rank rank, Suit suit, Color color, boolean faceDown) {
         this.rank = rank;
+        this.suit = suit;
         this.color = color;
         this.faceDown = faceDown;
     }
@@ -19,7 +21,9 @@ public class Card {
     public Rank getRank() {
         return rank;
     }
-
+    public Suit getSuit(){
+        return suit;
+    }
     public Color getColor() {
         return color;
     }
@@ -51,11 +55,7 @@ public class Card {
         if (faceDown) {fileName = "cardASCII/cardback.txt";} 
 
         else {
-            if(this.getColor().equals(Color.RED)){
-                fileName = "cardASCII/" + getRank().getNumber() + "-RED" + ".txt";
-            }else{
-                fileName = "cardASCII/" + getRank().getNumber() + "-BLACK" + ".txt";
-            }
+            fileName = "cardASCII/" + getRank().getNumber() + getSuit().getSuitName() + ".txt";
         }
 
         try {
