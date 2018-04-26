@@ -8,7 +8,7 @@ public class Game {
     private Deck cardsOnTable;
 
     private Card patternCard;
-    private Card cardOnTop;
+    
 
     public Game() {
         deck = new Deck();
@@ -29,16 +29,17 @@ public class Game {
             displayGameTable();
             
             person.move(computer, cardsOnTable, patternCard);
-            if(person.wasCheck){    
-                person.wasCheck = false;
+            if(computer.getIsChecked()){    
+                computer.setIsChecked(false);
                 newPatternCard();
             }
+            clearScreen();
             displayGameTable();
-            // sleep(1);
+            sleep(1);
             
             computer.move(person, cardsOnTable, patternCard);
-            if(person.wasCheck){
-                person.wasCheck = false;
+            if(person.getIsChecked()){
+                person.setIsChecked(false);
                 newPatternCard();
             }
             displayGameTable();
@@ -75,9 +76,9 @@ public class Game {
     }
 
     public void newPatternCard(){
-        Card lastCard = person.list.get(person.list.size()-1);
+        Card lastCard = person.getOtherCards().get(person.getOtherCards().size()-1);
         patternCard = lastCard;
-        person.list.remove(lastCard);
+        person.getOtherCards().remove(lastCard);
     }
 
     public void setPatternCard() {
