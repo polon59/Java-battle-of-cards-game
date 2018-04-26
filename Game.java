@@ -27,11 +27,21 @@ public class Game {
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
             clearScreen();
             displayGameTable();
+            
             person.move(computer, cardsOnTable, patternCard);
+            if(person.wasCheck){    
+                person.wasCheck = false;
+                newPatternCard();
+            }
             displayGameTable();
             // sleep(1);
+            
             computer.move(person, cardsOnTable, patternCard);
-            // displayGameTable();
+            if(person.wasCheck){
+                person.wasCheck = false;
+                newPatternCard();
+            }
+            displayGameTable();
             if(computer.getCardsInHand().size() == 0) {
                 clearScreen();
                 displayGameTable();
@@ -64,6 +74,12 @@ public class Game {
         }
     }
 
+    public void newPatternCard(){
+        Card lastCard = person.list.get(person.list.size()-1);
+        patternCard = lastCard;
+        person.list.remove(lastCard);
+    }
+
     public void setPatternCard() {
         patternCard = deck.getLastCard();
         deck.removeCardFromPile(patternCard);
@@ -81,12 +97,14 @@ public class Game {
         System.out.println("Cards on pile " + cardsOnTable.getSizeOfPile());
     }
 
+
+    
     public void displayGameTable() {
         computer.displayCardsInhand();
         System.out.println("\n");
-
+        
         displayCardsOnTable();
-
+        
         System.out.println("\n");
         person.displayCardsInhand();
     }

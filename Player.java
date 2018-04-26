@@ -12,7 +12,10 @@ public abstract class Player {
     protected List<Card> cardsInHand;
     protected int numOfPutCards;
     protected int startHandSize;
-    private List<Card> list;
+    public List<Card> list;
+
+
+    public static boolean wasCheck = false;
 
     public abstract int pickCard(Deck deck, Card patternCard);
 
@@ -29,14 +32,12 @@ public abstract class Player {
             this.numOfPutCards ++;
         } else if(option == 2) {
             check(deck, opponent, patternCard);
+            wasCheck = true;
         }
         else if(option == 3){
             takeAdditionalCard();
-            isLastComputerCard = true;
         }
     }
-
-
 
     public void placeCardOnTop(Deck deck, Card patternCard) {
         int index = pickCard(deck, patternCard);

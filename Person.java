@@ -10,6 +10,7 @@ public class Person extends Player{
         drawCards(deck);
         this.startHandSize = cardsInHand.size();
     }
+    
 
     public void addCardsFromPile(Deck pileOnTable) {
         for (Card card : pileOnTable.getListOfCards()) {

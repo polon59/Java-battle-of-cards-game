@@ -12,6 +12,7 @@ public class Computer extends Player {
         }
     }
 
+    
     public int pickCard(Deck deck, Card patternCard) {
         
         int cardIndex;
