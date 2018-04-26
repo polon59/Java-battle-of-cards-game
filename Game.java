@@ -76,7 +76,7 @@ public class Game {
         if (cardsOnTable.getSizeOfPile() == 0) {
             System.out.println(blankCard);
         } else {
-            System.out.println(cardsOnTable.getFirstCard());
+            System.out.println(cardsOnTable.getLastCard());
         }
         System.out.println("Cards on pile " + cardsOnTable.getSizeOfPile());
     }
