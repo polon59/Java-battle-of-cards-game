@@ -4,17 +4,16 @@ import java.util.Scanner;
 
 // abstract class for class Player
 public abstract class Player {
-    Scanner reader = new Scanner(System.in);
+    protected Scanner reader = new Scanner(System.in);
 
-    public static boolean isLastComputerCard;
+    protected boolean isLastComputerCard;
 
+    private int numOfAddedCards;
     protected List<Card> cardsInHand;
     protected int numOfPutCards;
     protected int startHandSize;
-    public List<Card> list;
-
-
-    public static boolean wasCheck = false;
+    private List<Card> otherCards;
+    protected boolean isChecked;
 
     private final int NUM_OF_LINES = 7;
 
@@ -33,13 +32,14 @@ public abstract class Player {
             this.numOfPutCards ++;
         } else if(option == 2) {
             check(deck, opponent, patternCard);
-            wasCheck = true;
+            opponent.isChecked = true;
         }
         else if(option == 3){
             if (opponent.getClass().getSimpleName().equals("Computer"))
                 takeAdditionalCard(false);
             else takeAdditionalCard(true);
             isLastComputerCard = true;
+            numOfAddedCards++;
         }
     }
 
@@ -53,10 +53,10 @@ public abstract class Player {
 
     //ADDITIONAL FUNCTION
     public void takeAdditionalCard(boolean isDown){
-        Card card = this.list.get(list.size()-1);
+        Card card = this.otherCards.get(otherCards.size()-1);
         card.setFaceDown(isDown);
         this.cardsInHand.add(card);
-        list.remove(list.size()-1);
+        otherCards.remove(otherCards.size()-1);
         sortCards();
     }
 
@@ -69,7 +69,7 @@ public abstract class Player {
             cardsInHand.add(list.get(i));
             list.remove(i);
         }
-        this.list = list;
+        otherCards = list;
     }
 
     public void check(Deck pileOnTable, Player opponent, Card patternCard) {
@@ -78,7 +78,7 @@ public abstract class Player {
             return;
         } else {
             if (pileOnTable.isCardValid(patternCard)) {
-                if (this.cardsInHand.size() + pileOnTable.getSizeOfPile() < 18) {
+                if (this.cardsInHand.size() + pileOnTable.getSizeOfPile() < 18 +  numOfAddedCards) {
                     this.addCardsFromPile(pileOnTable);
                     pileOnTable.clearPile();
                 }
@@ -91,6 +91,13 @@ public abstract class Player {
         }
     }
 
+    public abstract void setIsChecked(boolean b); 
+
+    public abstract boolean getIsChecked();
+
+    public List<Card> getOtherCards() {
+        return otherCards;
+    }
 
     public List<Card> getCardsInHand() {
         return this.cardsInHand;
