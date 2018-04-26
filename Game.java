@@ -1,14 +1,14 @@
 import java.util.concurrent.TimeUnit;
 
 public class Game {
-    Player person;
-    Player computer;
+    private Player person;
+    private Player computer;
 
-    Deck deck;
-    Deck cardsOnTable;
+    private Deck deck;
+    private Deck cardsOnTable;
 
-    Card patternCard;
-    Card cardOnTop;
+    private Card patternCard;
+    private Card cardOnTop;
 
     public Game() {
         deck = new Deck();
@@ -27,12 +27,21 @@ public class Game {
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
             clearScreen();
             displayGameTable();
+            
             person.move(computer, cardsOnTable, patternCard);
-            clearScreen();
+            if(person.wasCheck){    
+                person.wasCheck = false;
+                newPatternCard();
+            }
             displayGameTable();
-            sleep(1);
+            // sleep(1);
+            
             computer.move(person, cardsOnTable, patternCard);
-            // displayGameTable();
+            if(person.wasCheck){
+                person.wasCheck = false;
+                newPatternCard();
+            }
+            displayGameTable();
             if(computer.getCardsInHand().size() == 0) {
                 clearScreen();
                 displayGameTable();
@@ -41,7 +50,7 @@ public class Game {
             }
         }
         clearScreen();
-        cardsOnTable.getFirstCard().turnCard();
+        cardsOnTable.getLastCard().turnCard();
         displayGameTable();
         if (person.getCardsInHand().size() == 0) {
             System.out.println("PLAYER WINS");
@@ -65,8 +74,15 @@ public class Game {
         }
     }
 
+    public void newPatternCard(){
+        Card lastCard = person.list.get(person.list.size()-1);
+        patternCard = lastCard;
+        person.list.remove(lastCard);
+    }
+
     public void setPatternCard() {
         patternCard = deck.getLastCard();
+        deck.removeCardFromPile(patternCard);
     }
 
     public void displayCardsOnTable() {
@@ -76,17 +92,19 @@ public class Game {
         if (cardsOnTable.getSizeOfPile() == 0) {
             System.out.println(blankCard);
         } else {
-            System.out.println(cardsOnTable.getFirstCard());
+            System.out.println(cardsOnTable.getLastCard());
         }
         System.out.println("Cards on pile " + cardsOnTable.getSizeOfPile());
     }
 
+
+    
     public void displayGameTable() {
         computer.displayCardsInhand();
         System.out.println("\n");
-
+        
         displayCardsOnTable();
-
+        
         System.out.println("\n");
         person.displayCardsInhand();
     }

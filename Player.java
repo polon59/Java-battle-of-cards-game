@@ -1,24 +1,45 @@
 import java.util.ArrayList;
 import java.util.*;
+import java.util.Scanner;
 
 // abstract class for class Player
 public abstract class Player {
+    Scanner reader = new Scanner(System.in);
 
-    public List<Card> cardsInHand;
-    final String ANSI_RESET = "\u001B[0m";
+    public static boolean isLastComputerCard;
+
+    protected List<Card> cardsInHand;
+    protected int numOfPutCards;
+    protected int startHandSize;
+    public List<Card> list;
+
+
+    public static boolean wasCheck = false;
+
+    private final int NUM_OF_LINES = 7;
 
     public abstract int pickCard(Deck deck, Card patternCard);
 
-    public abstract int chooseOption(Deck deck, Card patternCard);
+    public abstract int chooseOption(Deck deck, Card patternCard, Player opponent);
 
     public abstract void addCardsFromPile(Deck pileOnTable);
 
     public void move(Player opponent, Deck deck, Card patternCard) {
-        int option = chooseOption(deck, patternCard);
+
+        int option = chooseOption(deck, patternCard, opponent);
+        isLastComputerCard = false;
         if (option == 1) {
             placeCardOnTop(deck, patternCard);
-        } else {
+            this.numOfPutCards ++;
+        } else if(option == 2) {
             check(deck, opponent, patternCard);
+            wasCheck = true;
+        }
+        else if(option == 3){
+            if (opponent.getClass().getSimpleName().equals("Computer"))
+                takeAdditionalCard(false);
+            else takeAdditionalCard(true);
+            isLastComputerCard = true;
         }
     }
 
@@ -30,6 +51,16 @@ public abstract class Player {
         cardsInHand.remove(index);
     }
 
+    //ADDITIONAL FUNCTION
+    public void takeAdditionalCard(boolean isDown){
+        Card card = this.list.get(list.size()-1);
+        card.setFaceDown(isDown);
+        this.cardsInHand.add(card);
+        list.remove(list.size()-1);
+        sortCards();
+    }
+
+    
     public void drawCards(Deck deck) {
         List<Card> list = deck.getListOfCards();
         this.cardsInHand = new ArrayList<>();
@@ -38,6 +69,7 @@ public abstract class Player {
             cardsInHand.add(list.get(i));
             list.remove(i);
         }
+        this.list = list;
     }
 
     public void check(Deck pileOnTable, Player opponent, Card patternCard) {
@@ -54,6 +86,8 @@ public abstract class Player {
                 opponent.addCardsFromPile(pileOnTable);
                 pileOnTable.clearPile();
             }
+            resetValues(opponent);
+            sortCards();
         }
     }
 
@@ -62,31 +96,36 @@ public abstract class Player {
         return this.cardsInHand;
     }
     public void sortCards(){
-        Collections.sort(cardsInHand, new Comparator<Card>() {
+        Collections.sort(this.cardsInHand, new Comparator<Card>() {
             public int compare(Card card1, Card card2) {
                 return card1.getRank().compareTo(card2.getRank());
             }
         });
     }
 
+    private void resetValues(Player opponent) {
+        opponent.numOfPutCards = 0;
+        this.numOfPutCards = 0;
+        opponent.startHandSize = opponent.cardsInHand.size();
+        this.startHandSize = this.cardsInHand.size();
+    }
 
     public void displayCardsInhand() {
-        int allLines = 7; 
+        int allLines = NUM_OF_LINES; 
         
         displayCardIndexes();
-        System.out.println();
 
         for (int currentLineNumber = 0; currentLineNumber < allLines; currentLineNumber++) {
 
             for (int i = 0; i < cardsInHand.size(); i++) {
-                if (cardsInHand.get(i).faceDown) {
-                    displayLineInBlue(i, currentLineNumber);
+                if (cardsInHand.get(i).getFaceDown()) {
+                    displayLineInColor(i, currentLineNumber, "BLUE");
                 } 
                 else {
                     if (cardsInHand.get(i).getColor().equals(Color.RED)) {
-                        displayLineInRed(i, currentLineNumber);
+                        displayLineInColor(i, currentLineNumber, "RED");
                     } else {
-                        displayLineInBlack(i, currentLineNumber);
+                        displayLineInColor(i, currentLineNumber, "BLACK");
                     }
                 }
             }
@@ -101,30 +140,27 @@ public abstract class Player {
             if (cardIndex < 10) {System.out.print(cardIndex + 1 + "       ");} 
             else {System.out.print(cardIndex + 1 + "      ");}
         }
+        System.out.println();
     }
-        
-        
-    private void displayLineInBlue(int i, int currentLineNumber){
+
+    private void displayLineInColor(int i, int currentLineNumber, String color){
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_BLACK = "\u001B[30m";
+        final String ANSI_RED = "\u001B[31m";
         final String ANSI_BLUE = "\u001B[34m";
 
-        System.out.print(ANSI_BLUE + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
-        + ANSI_RESET);
-    }
-
-
-    private void displayLineInRed(int i, int currentLineNumber){
-        final String ANSI_RED = "\u001B[31m";
-
-        System.out.print(ANSI_RED + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
-        + ANSI_RESET);
-    }
-
-
-    private void displayLineInBlack(int i, int currentLineNumber){
-        final String ANSI_BLACK = "\u001B[30m";
-
-        System.out.print(ANSI_BLACK + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber)
-        + " " + ANSI_RESET);
+        if (color == "RED"){
+            System.out.print(ANSI_RED + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
+            + ANSI_RESET);
+        }
+        else if (color == "BLACK"){
+            System.out.print(ANSI_BLACK + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber)
+            + " " + ANSI_RESET);
+        }
+        else{
+            System.out.print(ANSI_BLUE + cardsInHand.get(i).readASCIIfromFile().get(currentLineNumber) + " "
+            + ANSI_RESET);
+        }
     }
 
 }
