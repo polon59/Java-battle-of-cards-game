@@ -55,7 +55,7 @@ public class Card {
         if (faceDown) {fileName = "cardASCII/cardback.txt";} 
 
         else {
-            fileName = "cardASCII/" + getRank().getNumber() + getSuit().getSuitName() + ".txt";
+            fileName = "cardASCII/" + getRank().getNumber() + "-" + getSuit().getSuitName() + ".txt";
         }
 
         try {

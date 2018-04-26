@@ -7,7 +7,7 @@ public enum Suit {
     private String suitName;
     private int n;
 
-    Rank(String suitName, int n){
+    Suit(String suitName, int n){
         this.suitName = suitName;
         this.n = n;
     }

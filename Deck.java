@@ -13,7 +13,7 @@ public class Deck {
 
     public void createCards() {
         
-        for (Suit suit : suit.values()) {
+        for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
                 if (suit.getN() % 2 == 1) {
                     listOfCards.add(new Card(rank, suit, Color.RED, false));
