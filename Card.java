@@ -21,9 +21,11 @@ public class Card {
     public Rank getRank() {
         return rank;
     }
-    public Suit getSuit(){
+
+    public Suit getSuit() {
         return suit;
     }
+
     public Color getColor() {
         return color;
     }
@@ -49,14 +51,46 @@ public class Card {
         faceDown = !faceDown;
     }
 
+    private String adjustFontColor(String cardImage, String color) {
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_BLACK = "\u001B[30m";
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_BLUE = "\u001B[34m";
+
+        if (color == "RED") {
+            cardImage = ANSI_RED + cardImage + ANSI_RESET;
+        } else if (color == "BLACK") {
+            cardImage = ANSI_BLACK + cardImage + ANSI_RESET;
+        } else {
+            cardImage = ANSI_BLUE + cardImage + ANSI_RESET;
+        }
+
+        return cardImage;
+    }
+
+    private String adjustColorParameter() {
+        if (this.getFaceDown()) {
+            return "BLUE";
+        } else {
+            if (this.getColor().equals(Color.RED)) {
+                return "RED";
+            } else {
+                return "BLACK";
+            }
+        }
+    }
+
+    private String adjutstFileToReadName() {
+        if (faceDown) {
+            return "cardASCII/cardback.txt";
+        } else {
+            return "cardASCII/" + getRank().getNumber() + "-" + getSuit().getSuitName() + ".txt";
+        }
+    }
+
     public ArrayList<String> readASCIIfromFile() {
         ArrayList<String> lines = new ArrayList<>();
-        String fileName;
-        if (faceDown) {fileName = "cardASCII/cardback.txt";} 
-
-        else {
-            fileName = "cardASCII/" + getRank().getNumber() + "-" + getSuit().getSuitName() + ".txt";
-        }
+        String fileName = adjutstFileToReadName();
 
         try {
             Scanner fileReaded = new Scanner(new File(fileName));
@@ -66,8 +100,10 @@ public class Card {
             }
 
             fileReaded.close();
-        
-        } catch (FileNotFoundException e) {System.out.println("file not found");}
+
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found");
+        }
 
         return lines;
     }
@@ -75,42 +111,15 @@ public class Card {
     public String toString() {
         ArrayList<String> cardLines = readASCIIfromFile();
         String cardImage = "";
-        String color;
+        String colorParameter = adjustColorParameter();
 
         for (int i = 0; i < cardLines.size(); i++) {
             cardImage += cardLines.get(i) + "\n";
         }
 
-        if (faceDown) {color = "BLUE";}
-        else {
-            if (this.getColor().equals(Color.RED)) {
-                color = "RED";
-            } 
-            else {color = "BLACK";}
-        }
-        
-        String cardImageInColor = adjustCardColor(cardImage, color);
+        String cardImageInColor = adjustFontColor(cardImage, colorParameter);
 
         return cardImageInColor;
-    }
-
-    private String adjustCardColor(String cardImage, String color){
-        final String ANSI_RESET = "\u001B[0m";
-        final String ANSI_BLACK = "\u001B[30m";
-        final String ANSI_RED = "\u001B[31m";
-        final String ANSI_BLUE = "\u001B[34m";
-
-        if (color == "RED"){
-            cardImage = ANSI_RED + cardImage + ANSI_RESET;
-        }
-        else if (color == "BLACK"){
-            cardImage = ANSI_BLACK + cardImage + ANSI_RESET;
-        }
-        else{
-            cardImage = ANSI_BLUE + cardImage + ANSI_RESET;
-        }
-
-        return cardImage;  
     }
 
 }
