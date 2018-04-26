@@ -31,10 +31,11 @@ public class Computer extends Player {
     }
 
     public int chooseOption(Deck deck, Card patternCard, Player opponent) {
-        
         int option = 0;
-
-        if (cardsInHand.size() + deck.getSizeOfPile() == 18) {
+        if(isLastComputerCard == true){
+            option = 1;
+        }
+        else if (cardsInHand.size() + deck.getSizeOfPile() == 18) {
             option = 2;
         } 
         else if (cardsInHand.size() == 1) {

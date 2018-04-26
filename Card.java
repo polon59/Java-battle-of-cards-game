@@ -74,31 +74,45 @@ public class Card {
 
     public String toString() {
         ArrayList<String> cardLines = readASCIIfromFile();
-        final String ANSI_RESET = "\u001B[0m";
-        final String ANSI_BLACK = "\u001B[30m";
-        final String ANSI_RED = "\u001B[31m";
-        final String ANSI_BLUE = "\u001B[34m";
-        String cardImageInColor;
         String cardImage = "";
+        String color;
 
         for (int i = 0; i < cardLines.size(); i++) {
             cardImage += cardLines.get(i) + "\n";
         }
 
-        if (faceDown) {
-            cardImageInColor = ANSI_BLUE + cardImage + ANSI_RESET;
-        }
+        if (faceDown) {color = "BLUE";}
         else {
             if (this.getColor().equals(Color.RED)) {
-                cardImageInColor = ANSI_RED + cardImage + ANSI_RESET;
+                color = "RED";
             } 
-            else {
-                cardImageInColor = ANSI_BLACK + cardImage + ANSI_RESET;
-            }
+            else {color = "BLACK";}
         }
+        
+        String cardImageInColor = adjustCardColor(cardImage, color);
 
         return cardImageInColor;
     }
+
+    private String adjustCardColor(String cardImage, String color){
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_BLACK = "\u001B[30m";
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_BLUE = "\u001B[34m";
+
+        if (color == "RED"){
+            cardImage = ANSI_RED + cardImage + ANSI_RESET;
+        }
+        else if (color == "BLACK"){
+            cardImage = ANSI_BLACK + cardImage + ANSI_RESET;
+        }
+        else{
+            cardImage = ANSI_BLUE + cardImage + ANSI_RESET;
+        }
+
+        return cardImage;  
+    }
+
 
     public enum Color {
         RED, BLACK;

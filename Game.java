@@ -28,7 +28,6 @@ public class Game {
             clearScreen();
             displayGameTable();
             person.move(computer, cardsOnTable, patternCard);
-            clearScreen();
             displayGameTable();
             // sleep(1);
             computer.move(person, cardsOnTable, patternCard);
@@ -67,6 +66,7 @@ public class Game {
 
     public void setPatternCard() {
         patternCard = deck.getLastCard();
+        deck.removeCardFromPile(patternCard);
     }
 
     public void displayCardsOnTable() {
