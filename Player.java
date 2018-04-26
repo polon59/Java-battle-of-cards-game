@@ -76,7 +76,7 @@ public abstract class Player {
                     displayLineInBlue(i, currentLineNumber);
                 } 
                 else {
-                    if (cardsInHand.get(i).getColor().equals(Card.Color.RED)) {
+                    if (cardsInHand.get(i).getColor().equals(Color.RED)) {
                         displayLineInRed(i, currentLineNumber);
                     } else {
                         displayLineInBlack(i, currentLineNumber);

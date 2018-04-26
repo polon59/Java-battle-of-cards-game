@@ -11,7 +11,7 @@ public class Deck {
 
     public void createCards() {
         for (int i = 0; i < 2; i++) {
-            for (Card.Color color : Card.Color.values()) {
+            for (Color color : Color.values()) {
                 for (int rank = 1; rank < 14; rank++) {
                     listOfCards.add(new Card(rank, color, false));
                 }
