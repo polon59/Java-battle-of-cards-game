@@ -8,9 +8,9 @@ public class Person extends Player{
 
     public Person(Deck deck) {
         drawCards(deck);
+        sortCards();
         this.startHandSize = cardsInHand.size();
     }
-
     public void addCardsFromPile(Deck pileOnTable) {
         for (Card card : pileOnTable.getListOfCards()) {
             card.setFaceDown(false);

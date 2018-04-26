@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.Scanner;
-
 
 // abstract class for class Player
 public abstract class Player {
@@ -88,6 +87,13 @@ public abstract class Player {
     public List<Card> getCardsInHand() {
         return this.cardsInHand;
     }
+    public void sortCards(){
+        Collections.sort(cardsInHand, new Comparator<Card>() {
+            public int compare(Card card1, Card card2) {
+                return card1.getRank().compareTo(card2.getRank());
+            }
+        });
+    }
 
     private void resetValues(Player opponent) {
         opponent.numOfPutCards = 0;
@@ -108,8 +114,8 @@ public abstract class Player {
                     displayLineInColor(i, currentLineNumber, "BLUE");
                 } 
                 else {
-                    if (cardsInHand.get(i).getColor().equals(Card.Color.RED)) {
-                        displayLineInColor(i, currentLineNumber, "RED");
+                    if (cardsInHand.get(i).getColor().equals(Color.RED)) {
+                        displayLineInRed(i, currentLineNumber);
                     } else {
                         displayLineInColor(i, currentLineNumber, "BLACK");
                     }
