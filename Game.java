@@ -70,7 +70,7 @@ public class Game {
     }
 
     public void displayCardsOnTable() {
-        String blankCard = "_______\n|     |\n|     |\n| PILE|\n|     |\n|_____|";
+        String blankCard = "\n\n\n\n\n";
         System.out.println(patternCard);
 
         if (cardsOnTable.getSizeOfPile() == 0) {
