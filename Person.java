@@ -6,9 +6,9 @@ import java.lang.Integer;
 public class Person extends Player{
     private Scanner reader;
 
-
     public Person(Deck deck) {
         drawCards(deck);
+        this.startHandSize = cardsInHand.size();
     }
 
     public void addCardsFromPile(Deck pileOnTable) {
@@ -18,7 +18,7 @@ public class Person extends Player{
         }
     }
 
-    public int chooseOption(Deck deck, Card patternCard){
+    public int chooseOption(Deck deck, Card patternCard, Player opponent){
         return foolproofInput("1. Pick card\n2. Check opponent", 2);
     }
     
