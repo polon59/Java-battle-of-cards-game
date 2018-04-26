@@ -5,6 +5,8 @@ import java.util.List;
 public class Deck {
     private List<Card> listOfCards;
 
+    private static final int FIRST_CARD = 0;
+
     public Deck() {
         listOfCards = new ArrayList<>();
     }
@@ -46,7 +48,7 @@ public class Deck {
     }
 
     public Card getFirstCard() {
-        return getCard(0);
+        return getCard(FIRST_CARD);
     }
 
     public Card getLastCard() {
