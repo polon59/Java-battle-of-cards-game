@@ -9,7 +9,7 @@ public class Person extends Player{
 
     public Person(Deck deck) {
         drawCards(deck);
-    }
+        sortCards();    }
 
     public void addCardsFromPile(Deck pileOnTable) {
         for (Card card : pileOnTable.getListOfCards()) {
