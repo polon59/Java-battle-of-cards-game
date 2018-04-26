@@ -27,16 +27,11 @@ public class Game {
             computerRound();
 
             if (computer.checkIfPlayerHasNoCards()) {
-                // clearScreen();
-                // displayGameTable();
-                // person.move(computer, cardsOnTable, patternCard);
                 personRound();
-                //displayGameTable();
             }
         }
-        performFinalCheckRound();
+        performFinalCheck();
         displayWinnerName();
-        
     }
 
     private void personRound(){
@@ -61,7 +56,7 @@ public class Game {
         }
     }
 
-    private void performFinalCheckRound(){
+    private void performFinalCheck(){
         clearScreen();
         cardsOnTable.getLastCard().turnCard();
         displayGameTable();
