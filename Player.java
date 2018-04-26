@@ -30,7 +30,9 @@ public abstract class Player {
             check(deck, opponent, patternCard);
         }
         else if(option == 3){
-            takeAdditionalCard();
+            if (opponent.getClass().getSimpleName().equals("Computer"))
+                takeAdditionalCard(false);
+            else takeAdditionalCard(true);
             isLastComputerCard = true;
         }
     }
@@ -46,11 +48,12 @@ public abstract class Player {
     }
 
     //ADDITIONAL FUNCTION
-    public void takeAdditionalCard(){
+    public void takeAdditionalCard(boolean isDown){
         Card card = this.list.get(list.size()-1);
-        card.setFaceDown(false);
+        card.setFaceDown(isDown);
         this.cardsInHand.add(card);
         list.remove(list.size()-1);
+        sortCards();
     }
 
     
@@ -80,6 +83,7 @@ public abstract class Player {
                 pileOnTable.clearPile();
             }
             resetValues(opponent);
+            sortCards();
         }
     }
 
@@ -88,7 +92,7 @@ public abstract class Player {
         return this.cardsInHand;
     }
     public void sortCards(){
-        Collections.sort(cardsInHand, new Comparator<Card>() {
+        Collections.sort(this.cardsInHand, new Comparator<Card>() {
             public int compare(Card card1, Card card2) {
                 return card1.getRank().compareTo(card2.getRank());
             }
