@@ -10,6 +10,7 @@ public class Computer extends Player {
         for (int i = 0; i < super.cardsInHand.size(); i++) {
             super.cardsInHand.get(i).turnCard();
         }
+        this.playerName = "computer";
     }
 
     
