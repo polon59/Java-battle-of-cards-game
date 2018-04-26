@@ -41,21 +41,6 @@ public class Game {
         checkIfnewPatternCardIsNeeded(person);
     }
 
-    private void personRound(){
-        clearScreen();
-        displayGameTable();
-        person.move(computer, cardsOnTable, patternCard);
-        checkIfnewPatternCardIsNeeded(computer);
-    }
-
-    private void computerRound(){
-        clearScreen();
-        displayGameTable();
-        sleep(1);
-        computer.move(person, cardsOnTable, patternCard);
-        checkIfnewPatternCardIsNeeded(person);
-    }
-
     private void checkIfnewPatternCardIsNeeded(Player opponent){
         if (opponent.getIsChecked()) {
             newPatternCard();
