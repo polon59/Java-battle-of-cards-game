@@ -95,14 +95,6 @@ public class Computer extends Player {
 
     }
 
-    public void setIsChecked(boolean b) {
-        this.isChecked = b;
-    }
-
-    public boolean getIsChecked() {
-        return isChecked;
-    }
-
     private double getChanceForCheck(double percent) {
         double base = (double) 2 / 3;
         if (percent < (double) 1 / 3) {

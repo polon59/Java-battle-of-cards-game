@@ -20,14 +20,6 @@ public class Person extends Player{
         }
     }
 
-    public void setIsChecked(boolean b) {
-        this.isChecked = b;
-    }
-
-    public boolean getIsChecked() {
-        return isChecked;
-    }
-
     public int chooseOption(Deck deck, Card patternCard, Player opponent){
         boolean isWrongInput = true;
         int index = 1;

@@ -22,6 +22,15 @@ public abstract class Player {
     public abstract int chooseOption(Deck deck, Card patternCard, Player opponent);
 
     public abstract void addCardsFromPile(Deck pileOnTable);
+    
+    public void setIsChecked(boolean b) {
+        this.isChecked = b;
+    }
+
+    public boolean getIsChecked() {
+        return isChecked;
+    }
+
 
     public void move(Player opponent, Deck deck, Card patternCard) {
 
@@ -90,10 +99,6 @@ public abstract class Player {
             sortCards();
         }
     }
-
-    public abstract void setIsChecked(boolean b); 
-
-    public abstract boolean getIsChecked();
 
     public List<Card> getOtherCards() {
         return otherCards;
