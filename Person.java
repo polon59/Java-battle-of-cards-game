@@ -19,7 +19,7 @@ public class Person extends Player{
     }
 
     public int chooseOption(Deck deck, Card patternCard){
-        return foolproofInput("1. Pick card\n2. Check opponent", 2);
+        return foolproofInput("1. Pick card\n2. Check opponent\n3. Take additional card", 3);
     }
     
     public int pickCard(Deck deck, Card patternCard){

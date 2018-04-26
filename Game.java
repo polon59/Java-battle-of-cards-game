@@ -26,6 +26,7 @@ public class Game {
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
             displayGameTable();
             person.move(computer, cardsOnTable, patternCard);
+    
             displayGameTable();
             computer.move(person, cardsOnTable, patternCard);
         }

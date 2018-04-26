@@ -31,7 +31,10 @@ public class Computer extends Player {
     }
 
     public int chooseOption(Deck deck, Card patternCard) {
-        int option = 0;
+        int option = 1;
+        if(isLastComputerCard == true){
+            return option;
+        }
         if (cardsInHand.size() + deck.getSizeOfPile() == 18) {
             return option = 2;
         }
