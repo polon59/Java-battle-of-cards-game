@@ -78,7 +78,10 @@ public class Computer extends Player {
     }
 
     private double getChanceForCheck(double percent) {
-
-        return 540 * Math.pow((percent - 2/3), 2) + 20;
+        double base = (double) 2/3;
+        if (percent < (double)1/3) {
+            return percent * 2;
+        }
+        return 540 * Math.pow((percent - base), 2) + 20;
     }
 }
