@@ -49,7 +49,14 @@ public class Card {
         ArrayList<String> lines = new ArrayList<>();
         String fileName;
         if (faceDown) {fileName = "cardASCII/cardback.txt";} 
-        else {fileName = "cardASCII/" + rank + ".txt";}
+
+        else {
+            if(this.getColor().equals(Color.RED)){
+                fileName = "cardASCII/" + rank + "-RED" + ".txt";
+            }else{
+                fileName = "cardASCII/" + rank + "-BLACK" + ".txt";
+            }
+        }
 
         try {
             Scanner fileReaded = new Scanner(new File(fileName));
