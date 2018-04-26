@@ -19,15 +19,12 @@ public class Game {
     }
 
     public void runGame() {
-
         setPatternCard();
 
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
             
             personRound();
-
             computerRound();
-
 
             if (computer.checkIfPlayerHasNoCards()) {
                 // clearScreen();
@@ -38,18 +35,8 @@ public class Game {
             }
         }
         performFinalCheckRound();
-
-        if (person.getCardsInHand().size() == 0) {
-            System.out.println("PLAYER WINS");
-        } else {
-            System.out.println("COMPUTER WINS");
-        }
-    }
-
-    private void performFinalCheckRound(){
-        clearScreen();
-        cardsOnTable.getLastCard().turnCard();
-        displayGameTable();
+        displayWinnerName();
+        
     }
 
     private void personRound(){
@@ -74,8 +61,21 @@ public class Game {
         }
     }
 
-    private void clearScreen() {
+    private void performFinalCheckRound(){
+        clearScreen();
+        cardsOnTable.getLastCard().turnCard();
+        displayGameTable();
+    }
+    
+    private void displayWinnerName(){
+        if (person.checkIfPlayerHasNoCards()) {
+            System.out.println("PLAYER WINS");
+        } else {
+            System.out.println("COMPUTER WINS");
+        }
+    }
 
+    private void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
