@@ -22,6 +22,7 @@ public class Game {
     public void runGame() {
 
         setPatternCard();
+        System.out.println("♠");
 
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
             clearScreen();
@@ -82,11 +83,11 @@ public class Game {
 
     public void displayGameTable() {
         computer.displayCardsInhand();
-        System.out.println("\n \n");
+        System.out.println("\n");
 
         displayCardsOnTable();
 
-        System.out.println("\n \n");
+        System.out.println("\n");
         person.displayCardsInhand();
     }
 }
