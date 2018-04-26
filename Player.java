@@ -13,6 +13,8 @@ public abstract class Player {
     protected int startHandSize;
     private List<Card> list;
 
+    private final int NUM_OF_LINES = 7;
+
     public abstract int pickCard(Deck deck, Card patternCard);
 
     public abstract int chooseOption(Deck deck, Card patternCard, Player opponent);
@@ -103,7 +105,7 @@ public abstract class Player {
     }
 
     public void displayCardsInhand() {
-        int allLines = 7; 
+        int allLines = NUM_OF_LINES; 
         
         displayCardIndexes();
 
