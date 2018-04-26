@@ -12,7 +12,7 @@ public class Deck {
     public void createCards() {
         for (int i = 0; i < 2; i++) {
             for (Color color : Color.values()) {
-                for (int rank = 1; rank < 14; rank++) {
+                for (Rank rank : Rank.values()) {
                     listOfCards.add(new Card(rank, color, false));
                 }
             }
@@ -54,7 +54,7 @@ public class Deck {
     }
 
     public boolean isCardValid(Card patternCard) {
-        return (patternCard.getRank() == getLastCard().getRank()
+        return (patternCard.getRank().equals(getLastCard().getRank())
                 || patternCard.getColor().equals(getLastCard().getColor()));
     }
 

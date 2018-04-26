@@ -6,17 +6,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Card {
-    int rank;
+    Rank rank;
     Color color;
     boolean faceDown;
 
-    public Card(int rank, Color color, boolean faceDown) {
+    public Card(Rank rank, Color color, boolean faceDown) {
         this.rank = rank;
         this.color = color;
         this.faceDown = faceDown;
     }
 
-    public int getRank() {
+    public Rank getRank() {
         return rank;
     }
 
@@ -37,7 +37,7 @@ public class Card {
     }
 
     public boolean isSameRank(Card card) {
-        return this.getRank() == card.getRank();
+        return this.getRank().equals(card.getRank());
     }
 
     public void turnCard() {
@@ -52,9 +52,9 @@ public class Card {
 
         else {
             if(this.getColor().equals(Color.RED)){
-                fileName = "cardASCII/" + rank + "-RED" + ".txt";
+                fileName = "cardASCII/" + getRank().getNumber() + "-RED" + ".txt";
             }else{
-                fileName = "cardASCII/" + rank + "-BLACK" + ".txt";
+                fileName = "cardASCII/" + getRank().getNumber() + "-BLACK" + ".txt";
             }
         }
 
