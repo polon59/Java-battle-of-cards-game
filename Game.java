@@ -22,7 +22,7 @@ public class Game {
     public void runGame() {
 
         setPatternCard();
-        System.out.println("♠");
+       
 
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
             clearScreen();
