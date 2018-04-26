@@ -7,7 +7,7 @@ public abstract class Player {
     protected Scanner reader = new Scanner(System.in);
 
     protected boolean isLastComputerCard;
-
+    public String playerName;
     private int numOfAddedCards;
     protected List<Card> cardsInHand;
     protected int numOfPutCards;
@@ -29,6 +29,10 @@ public abstract class Player {
 
     public boolean getIsChecked() {
         return isChecked;
+    }
+
+    public String getPlayerName(){
+        return this.playerName;
     }
 
 
