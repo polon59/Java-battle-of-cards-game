@@ -8,7 +8,6 @@ public class Game {
     private Deck cardsOnTable;
 
     private Card patternCard;
-    
 
     public Game() {
         deck = new Deck();
@@ -22,46 +21,60 @@ public class Game {
     public void runGame() {
 
         setPatternCard();
-       
 
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
-            clearScreen();
-            displayGameTable();
             
-            person.move(computer, cardsOnTable, patternCard);
-            if(computer.getIsChecked()){    
-                computer.setIsChecked(false);
-                newPatternCard();
-            }
-            clearScreen();
-            displayGameTable();
-            sleep(1);
-            
-            computer.move(person, cardsOnTable, patternCard);
-            if(person.getIsChecked()){
-                person.setIsChecked(false);
-                newPatternCard();
-            }
-            displayGameTable();
-            if(computer.getCardsInHand().size() == 0) {
-                clearScreen();
-                displayGameTable();
-                person.move(computer, cardsOnTable, patternCard);
-                displayGameTable();
+            personRound();
+
+            computerRound();
+
+
+            if (computer.checkIfPlayerHasNoCards()) {
+                // clearScreen();
+                // displayGameTable();
+                // person.move(computer, cardsOnTable, patternCard);
+                personRound();
+                //displayGameTable();
             }
         }
-        clearScreen();
-        cardsOnTable.getLastCard().turnCard();
-        displayGameTable();
+        performFinalCheckRound();
+
         if (person.getCardsInHand().size() == 0) {
             System.out.println("PLAYER WINS");
         } else {
             System.out.println("COMPUTER WINS");
         }
-
     }
 
-    private static void clearScreen() {
+    private void performFinalCheckRound(){
+        clearScreen();
+        cardsOnTable.getLastCard().turnCard();
+        displayGameTable();
+    }
+
+    private void personRound(){
+        clearScreen();
+        displayGameTable();
+        person.move(computer, cardsOnTable, patternCard);
+        checkIfnewPatternCardIsNeeded(computer);
+    }
+
+    private void computerRound(){
+        clearScreen();
+        displayGameTable();
+        sleep(1);
+        computer.move(person, cardsOnTable, patternCard);
+        checkIfnewPatternCardIsNeeded(person);
+    }
+
+    private void checkIfnewPatternCardIsNeeded(Player opponent){
+        if (opponent.getIsChecked()) {
+            newPatternCard();
+            opponent.setIsChecked(false);
+        }
+    }
+
+    private void clearScreen() {
 
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -69,14 +82,14 @@ public class Game {
 
     private static void sleep(int seconds) {
         try {
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(seconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public void newPatternCard(){
-        Card lastCard = person.getOtherCards().get(person.getOtherCards().size()-1);
+    public void newPatternCard() {
+        Card lastCard = person.getOtherCards().get(person.getOtherCards().size() - 1);
         patternCard = lastCard;
         person.getOtherCards().remove(lastCard);
     }
@@ -86,27 +99,44 @@ public class Game {
         deck.removeCardFromPile(patternCard);
     }
 
-    public void displayCardsOnTable() {
-        String blankCard = "\n\n\n\n\n";
-        System.out.println(patternCard);
-
-        if (cardsOnTable.getSizeOfPile() == 0) {
-            System.out.println(blankCard);
-        } else {
-            System.out.println(cardsOnTable.getLastCard());
-        }
-        System.out.println("Cards on pile " + cardsOnTable.getSizeOfPile());
-    }
-
-
-    
     public void displayGameTable() {
         computer.displayCardsInhand();
         System.out.println("\n");
-        
+
         displayCardsOnTable();
-        
+
         System.out.println("\n");
         person.displayCardsInhand();
     }
+
+    public void displayCardsOnTable() {
+        System.out.println(patternCard);
+
+        if (checkifPileisEmpty()) {
+            displayEmptyPile();
+        } else {
+            displayFullPile();
+        }
+        showSizeOfPile();
+    }
+
+    private boolean checkifPileisEmpty(){
+        if (cardsOnTable.getSizeOfPile() == 0){
+            return true;
+        }
+        else{return false;}
+    }
+
+    private void displayEmptyPile() {
+        System.out.println("\n\n\n\n\n");
+    }
+
+    private void displayFullPile(){
+        System.out.println(cardsOnTable.getLastCard());
+    }
+
+    public void showSizeOfPile() {
+        System.out.println("Cards on pile " + cardsOnTable.getSizeOfPile());
+    }
+
 }
