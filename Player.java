@@ -52,6 +52,15 @@ public abstract class Player {
         }
     }
 
+    public boolean checkIfPlayerHasNoCards(){
+        if (this.getCardsInHand().size() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public void placeCardOnTop(Deck deck, Card patternCard) {
         int index = pickCard(deck, patternCard);
         Card chosenCard = getCardsInHand().get(index);
