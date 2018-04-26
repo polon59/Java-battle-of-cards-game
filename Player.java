@@ -11,7 +11,12 @@ public abstract class Player {
     protected List<Card> cardsInHand;
     protected int numOfPutCards;
     protected int startHandSize;
-    private List<Card> list;
+    public List<Card> list;
+
+
+    public static boolean wasCheck = false;
+
+    private final int NUM_OF_LINES = 7;
 
     public abstract int pickCard(Deck deck, Card patternCard);
 
@@ -28,6 +33,7 @@ public abstract class Player {
             this.numOfPutCards ++;
         } else if(option == 2) {
             check(deck, opponent, patternCard);
+            wasCheck = true;
         }
         else if(option == 3){
             if (opponent.getClass().getSimpleName().equals("Computer"))
@@ -36,8 +42,6 @@ public abstract class Player {
             isLastComputerCard = true;
         }
     }
-
-
 
     public void placeCardOnTop(Deck deck, Card patternCard) {
         int index = pickCard(deck, patternCard);
@@ -107,7 +111,7 @@ public abstract class Player {
     }
 
     public void displayCardsInhand() {
-        int allLines = 7; 
+        int allLines = NUM_OF_LINES; 
         
         displayCardIndexes();
 
