@@ -4,7 +4,6 @@ import java.util.Random;
 public class Computer extends Player {
     private Random generator = new Random();
     private Card validCard;
-    private List<Card> validCards;
 
     public Computer(Deck deck) {
         drawCards(deck);
@@ -17,9 +16,8 @@ public class Computer extends Player {
     public int pickCard(Deck deck, Card patternCard) {
 
         int cardIndex;
-        if (deck.getSizeOfPile() > 12) {
-            if (haveValidCard(patternCard) && validCards.size() > 1
-                    || cardsInHand.size() == 1 && haveValidCard(patternCard)) {
+        if (deck.getSizeOfPile() >= 12) {
+            if (haveValidCard(patternCard)) {
                 cardIndex = cardsInHand.indexOf(validCard);
             } else {
                 cardIndex = generator.nextInt(cardsInHand.size());
@@ -39,18 +37,29 @@ public class Computer extends Player {
     }
 
     public int chooseOption(Deck deck, Card patternCard, Player opponent) {
+
         int option = 0;
+
         if (isLastComputerCard == true) {
             option = 1;
+
         } else if (opponent.cardsInHand.size() == 0) {
             option = 2;
+
         } else if (cardsInHand.size() == 1) {
+
             if (haveValidCard(patternCard)) {
                 option = 1;
+
             } else
                 option = generator.nextInt(2) + 2;
+
         } else if (deck.getSizeOfPile() < 3) {
             option = 1;
+
+        } else if (cardsInHand.size() < opponent.cardsInHand.size() / 2) {
+            option = 1;
+
         } else {
             double usedCards = (double) opponent.numOfPutCards / opponent.startHandSize;
             System.out.println(opponent.numOfPutCards);
@@ -69,10 +78,10 @@ public class Computer extends Player {
         for (Card card : cardsInHand) {
             if (card.isSameColor(patternCard) || card.isSameRank(patternCard)) {
                 validCard = card;
-                validCards.add(card);
+                return true;
             }
         }
-        return validCards.size() > 0;
+        return false;
     }
 
     private int randomChoice(double percent) {
@@ -84,6 +93,14 @@ public class Computer extends Player {
         } else
             return 1;
 
+    }
+
+    public void setIsChecked(boolean b) {
+        this.isChecked = b;
+    }
+
+    public boolean getIsChecked() {
+        return isChecked;
     }
 
     private double getChanceForCheck(double percent) {
