@@ -22,16 +22,26 @@ public class Game {
         setPatternCard();
 
         while (person.getCardsInHand().size() > 0 && computer.getCardsInHand().size() > 0) {
-            
-            personRound();
-            computerRound();
+            performRound(person, computer);
+            performRound(computer, person);
+            // personRound();
+            // computerRound();
 
             if (computer.checkIfPlayerHasNoCards()) {
-                personRound();
+                performRound(person, computer);
+                //personRound();
             }
         }
         performFinalCheck();
         displayWinnerName();
+    }
+
+    private void performRound(Player currentPlayer, Player opponent){
+        clearScreen();
+        displayGameTable();
+        if (currentPlayer.getPlayerName() == "computer"){sleep(1);}
+        currentPlayer.move(opponent, cardsOnTable, patternCard);
+        checkIfnewPatternCardIsNeeded(person);
     }
 
     private void personRound(){
