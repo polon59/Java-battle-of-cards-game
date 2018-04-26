@@ -19,7 +19,29 @@ public class Person extends Player{
     }
 
     public int chooseOption(Deck deck, Card patternCard){
-        return foolproofInput("1. Pick card\n2. Check opponent", 2);
+        boolean isWrongInput = true;
+        int index = 1;
+        while(isWrongInput){
+            reader = new Scanner(System.in);
+            System.out.println("1. Pick card\n2. Check opponent\n3. Take additional card");
+            try{
+                index = reader.nextInt();
+                if(index > 0 && index < 4 ){
+                    if(index <2){
+                        isWrongInput = false;
+                    }
+                    else{
+                        if(this.cardsInHand.size() < 9){
+                            isWrongInput = false;
+                        }
+                    }
+                }
+            }
+            catch(InputMismatchException e){
+                System.out.println("Wrong input, try again");
+            }
+        }
+        return index;
     }
     
     public int pickCard(Deck deck, Card patternCard){

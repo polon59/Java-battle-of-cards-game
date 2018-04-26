@@ -28,7 +28,7 @@ public class Game {
             clearScreen();
             displayGameTable();
             person.move(computer, cardsOnTable, patternCard);
-            clearScreen();
+    
             displayGameTable();
             sleep(1);
             computer.move(person, cardsOnTable, patternCard);

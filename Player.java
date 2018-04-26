@@ -1,9 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 
 // abstract class for class Player
 public abstract class Player {
+    Scanner reader = new Scanner(System.in);
 
+    public static boolean isLastComputerCard;
+
+    private List<Card> list;
+    
     public List<Card> cardsInHand;
     final String ANSI_RESET = "\u001B[0m";
 
@@ -14,13 +21,22 @@ public abstract class Player {
     public abstract void addCardsFromPile(Deck pileOnTable);
 
     public void move(Player opponent, Deck deck, Card patternCard) {
+
         int option = chooseOption(deck, patternCard);
+        isLastComputerCard = false;
         if (option == 1) {
             placeCardOnTop(deck, patternCard);
-        } else {
+        } 
+        else if(option == 2) { 
             check(deck, opponent, patternCard);
         }
+        else if(option == 3){
+            takeAdditionalCard(deck);
+            isLastComputerCard = true;
+        }
     }
+
+
 
     public void placeCardOnTop(Deck deck, Card patternCard) {
         int index = pickCard(deck, patternCard);
@@ -30,6 +46,15 @@ public abstract class Player {
         cardsInHand.remove(index);
     }
 
+    //ADDITIONAL FUNCTION
+    public void takeAdditionalCard(Deck deck){
+        Card card = this.list.get(list.size()-1);
+        card.setFaceDown(false);
+        this.cardsInHand.add(card);
+        list.remove(list.size()-1);
+    }
+
+    
     public void drawCards(Deck deck) {
         List<Card> list = deck.getListOfCards();
         this.cardsInHand = new ArrayList<>();
@@ -38,6 +63,7 @@ public abstract class Player {
             cardsInHand.add(list.get(i));
             list.remove(i);
         }
+        this.list = list;
     }
 
     public void check(Deck pileOnTable, Player opponent, Card patternCard) {
